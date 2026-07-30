@@ -1,3 +1,5 @@
+<<<<<<< HEAD
+=======
 * {
 
     font-family: 'Times New Roman', Times, serif;
@@ -10,6 +12,7 @@
     text-decoration: none;
 
 }
+>>>>>>> 9514a5586fcb57d963b7fb877e21de250eddb4ce
 :root{
     --main-color: #c60c0c;
     --secondary-color:#939597;
@@ -17,6 +20,133 @@
     --bg-color:white;
 
     --box-shadow:#070304;
+<<<<<<< HEAD
+}
+/*  2nd PAGE (CATEGORY MENU) STYLES */
+.menu-section {
+    padding: 60px 20px;
+    background-color: var(--bg-color);
+    text-align: center;
+    min-height: 100vh;
+}
+
+.menu-container {
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.menu-title {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--box-shadow);
+    margin-bottom: 8px;
+}
+
+.menu-subtitle {
+    font-size: 16px;
+    color: var(--secondary-color);
+    margin-bottom: 35px;
+}
+
+/* Category Filter Tabs (6 Buttons) */
+.tab-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.tab-btn {
+    background-color: transparent;
+    color: var(--main-color);
+    border: 1.5px solid var(--main-color);
+    padding: 10px 22px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.tab-btn:hover, .tab-btn.active {
+    background-color: var(--main-color);
+    color: var(--bg-color);
+}
+
+/* Recipe Content & Grid */
+.category-content {
+    display: none;
+}
+
+.recipe-grid {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+.recipe-card {
+    width: 100%;
+    max-width: 380px;
+    background: var(--bg-color);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    border: 1px solid var(--secondary-color);
+    text-align: left;
+}
+
+.card-img-wrapper {
+    width: 100%;
+    height: 220px;
+    overflow: hidden;
+}
+
+.card-img-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.card-body {
+    padding: 20px;
+}
+
+.card-body h3 {
+    font-size: 18px;
+    font-weight: bold;
+    color: var(--box-shadow);
+    margin-bottom: 8px;
+}
+
+.card-body p {
+    font-size: 14px;
+    color: var(--secondary-color);
+    line-height: 1.5;
+}
+
+/* Back to Home Button */
+.back-home-wrapper {
+    margin-top: 50px;
+}
+
+.back-home-btn {
+    display: inline-block;
+    background-color: var(--box-shadow);
+    color: var(--bg-color);
+    text-decoration: none;
+    padding: 12px 35px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.back-home-btn:hover {
+    background-color: var(--box-shadow);
+=======
 /* Navigation Bar */
 nav {
     display: flex;
@@ -268,4 +398,5 @@ site-footer {
     padding-top: 25px;
     font-size: 14px;
     color: var(--secondary-color);
+>>>>>>> 9514a5586fcb57d963b7fb877e21de250eddb4ce
 }

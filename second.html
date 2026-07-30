@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Category Menu - Yummy.lk</title>
+    <!-- External CSS link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!--  CATEGORY MENU SECTION .. -->
+    <section class="menu-section">
+        <div class="menu-container">
+            
+            <!-- Category Title -->
+            <h1 id="category-title" class="menu-title">Category Menu</h1>
+            <p class="menu-subtitle">Explore specific delicious foods for every time of the day!</p>
+
+            <!-- Filter Tabs / Buttons -->
+            <div class="tab-buttons">
+                <button class="tab-btn" onclick="showCategory('breakfast', this)">Breakfast</button>
+                <button class="tab-btn" onclick="showCategory('lunch', this)">Lunch</button>
+                <button class="tab-btn" onclick="showCategory('dinner', this)">Dinner</button>
+                <button class="tab-btn" onclick="showCategory('desserts', this)">Desserts</button>
+                <button class="tab-btn" onclick="showCategory('drinks', this)">Drinks</button>
+                <button class="tab-btn" onclick="showCategory('snacks', this)">Snacks</button>
+            </div>
+
+            <!-- Content Area  -->
+            <div class="content-area">
+                
+                <!-- 1. BREAKFAST -->
+                <div id="breakfast" class="category-content">
+                    <div class="recipe-grid">
+                        <div class="recipe-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://i.pinimg.com/736x/8e/f7/2f/8ef72f77d2aa4db8daa990efadc3d253.jpg" alt="Milk Rice">
+                            </div>
+                            <div class="card-body">
+                                <h3>Sri Lankan Milk Rice (Kiribath)</h3>
+                                <p>Traditional rice cooked with coconut milk, served with Lunu Miris.</p>
+                            </div>
+                        </div>
+                        <div class="recipe-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://i.pinimg.com/1200x/d9/93/34/d99334d807cd20387bd4d8c7ade15c8c.jpg" alt="Egg Hoppers">
+                            </div>
+                            <div class="card-body">
+                                <h3>Egg Hoppers</h3>
+                                <p>Crispy rice flour pancakes with a soft cooked egg center.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. LUNCH -->
+                <div id="lunch" class="category-content">
+                    <div class="recipe-grid">
+                        <div class="recipe-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://i.pinimg.com/736x/d9/96/6b/d9966b3959a0d9fa1d1401bb84b53700.jpg" alt="Rice and Curry">
+                            </div>
+                            <div class="card-body">
+                                <h3>Traditional Rice & Curry Platter</h3>
+                                <p>White rice served with spicy chicken curry, dhal, and sambol.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. DINNER -->
+                <div id="dinner" class="category-content">
+                    <div class="recipe-grid">
+                        <div class="recipe-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://i.pinimg.com/1200x/d6/d0/75/d6d0759eea5d87f87488272a9fa5eb71.jpg" alt="Kothu Rotti">
+                            </div>
+                            <div class="card-body">
+                                <h3>Chicken Kothu Rotti</h3>
+                                <p>Shredded flatbread chopped on a hot griddle with chicken & veggies.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. DESSERTS -->
+                <div id="desserts" class="category-content">
+                    <div class="recipe-grid">
+                        <div class="recipe-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://i.pinimg.com/1200x/86/67/e6/8667e6d6df88eca115254236e17e1eaa.jpg" alt="Desserts">
+                            </div>
+                            <div class="card-body">
+                                <h3>Sri Lankan Watalappan</h3>
+                                <p>Rich custard dessert made with kithul jaggery and coconut milk.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. DRINKS -->
+                <div id="drinks" class="category-content">
+                    <div class="recipe-grid">
+                        <div class="recipe-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=80" alt="Smoothie">
+                            </div>
+                            <div class="card-body">
+                                <h3>Blueberry Protein Smoothie</h3>
+                                <p>Blended with protein, yogurt and forest blueberries.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. SNACKS -->
+                <div id="snacks" class="category-content">
+                    <div class="recipe-grid">
+                        <div class="recipe-card">
+                            <div class="card-img-wrapper">
+                                <img src="https://i.pinimg.com/1200x/d8/8c/f0/d88cf02ee4547838432e8d601aa462b1.jpg" alt="Snacks">
+                            </div>
+                            <div class="card-body">
+                                <h3>Spicy Dhal Vade</h3>
+                                <p>Crunchy tea-time snack made of split chickpeas and curry leaves.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Back to Home Button -->
+            <div class="back-home-wrapper">
+                <a href="index.html" class="back-home-btn">Back to Home</a>
+            </div>
+
+        </div>
+    </section>
+
+
+    <script>
+        function showCategory(catId, btn) {
+            document.querySelectorAll('.category-content').forEach(c => c.style.display = 'none');
+            document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+
+            const activeSec = document.getElementById(catId);
+            if(activeSec) activeSec.style.display = 'block';
+
+            document.getElementById('category-title').innerText = catId.charAt(0).toUpperCase() + catId.slice(1) + " Menu";
+
+            if(btn) {
+                btn.classList.add('active');
+            } else {
+                const buttons = document.querySelectorAll('.tab-btn');
+                buttons.forEach(b => {
+                    if(b.innerText.toLowerCase() === catId) b.classList.add('active');
+                });
+            }
+        }
+
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type') || 'breakfast'; 
+            showCategory(type);
+        };
+    </script>
+
+</body>
+</html>
