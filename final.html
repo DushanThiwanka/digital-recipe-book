@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yummy.lk</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Boxicons CDN Link -->
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <!-- link css file -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <!-- Left Side: Logo -->
+        <a href="#home" class="logo" onclick="switchPage('home')">Yummy.lk</a>
+
+        <!-- Center & Right: Navigation Links + Sign In Button inside Mobile Menu -->
+        <div class="nav-links">
+            <a href="#home" onclick="switchPage('home')">Home</a>
+            <a href="#about" onclick="alert('About Us Section')">About Us</a>
+            <a href="javascript:void(0)" onclick="alert('Add Recipe Feature')">Add Recipe</a>
+            <button class="signin-btn" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</button>
+        </div>
+
+        <!-- Mobile Hamburger Menu Icon -->
+        <i class='bx bx-menu' id="menu-icon"></i>
+    </nav>
+
+    <!-- 1. HOME PAGE SECTION -->
+    <div id="home-page" class="page-section animate-fade">
+        
+        <!-- Main Hero Section -->
+        <div id="heroCarousel" class="carousel slide carousel-fade hero" data-bs-ride="carousel">
+            <div class="carousel-inner h-100">
+                <div class="carousel-item active h-100">
+                    <div class="hero-content">
+                        <h1>What do you want to cook?</h1>
+                        <p>Discover delicious recipes, share your own, and cook like a pro.</p>
+                    </div>
+                </div>
+                <div class="carousel-item h-100">
+                    <div class="hero-content">
+                        <h1>Fresh Local Ingredients</h1>
+                        <p>Explore authentic Sri Lankan dishes and global flavors.</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Search Bar -->
+            <div class="search-box">
+                <input type="text" placeholder="Search ingredients or meals...">
+                <button type="submit">Search</button>
+            </div>
+        </div>
+
+        <!-- MEAL CATEGORIES SECTION -->
+        <section class="category-section">
+            <div class="category-container">
+                
+                <!-- Header-->
+                <h2 class="category-title">Choose a meal category</h2>
+                <p class="category-subtitle">Explore specific delicious foods for every time of the day!</p>
+                
+                <!-- Category Cards Grid -->
+                <div class="category-grid">
+                    
+                    <!-- 1. Breakfast -->
+                    <div class="category-card" onclick="openMenuPage('breakfast')">
+                        <div class="img-wrapper">
+                            <img src="https://i.pinimg.com/736x/c3/89/6d/c3896d054ccc22c7a94b1fb2a4e9649a.jpg" alt="Breakfast">
+                        </div>
+                        <h4>Breakfast</h4>
+                    </div>
+
+                    <!-- 2. Lunch -->
+                    <div class="category-card" onclick="openMenuPage('lunch')">
+                        <div class="img-wrapper">
+                            <img src="https://i.pinimg.com/736x/36/e9/1f/36e91fc843a2abdee12dccc0a97a6a27.jpg" alt="Lunch">
+                        </div>
+                        <h4>Lunch</h4>
+                    </div>
+
+                    <!-- 3. Dinner -->
+                    <div class="category-card" onclick="openMenuPage('dinner')">
+                        <div class="img-wrapper">
+                            <img src="https://i.pinimg.com/1200x/d6/d0/75/d6d0759eea5d87f87488272a9fa5eb71.jpg" alt="Dinner">
+                        </div>
+                        <h4>Dinner</h4>
+                    </div>
+
+                    <!-- 4. Desserts -->
+                    <div class="category-card" onclick="openMenuPage('desserts')">
+                        <div class="img-wrapper">
+                            <img src="https://i.pinimg.com/1200x/86/67/e6/8667e6d6df88eca115254236e17e1eaa.jpg" alt="Desserts">
+                        </div>
+                        <h4>Desserts</h4>
+                    </div>
+
+                    <!-- 5. Drinks -->
+                    <div class="category-card" onclick="openMenuPage('drinks')">
+                        <div class="img-wrapper">
+                            <img src="https://i.pinimg.com/1200x/30/5e/9e/305e9eaf8ef7a7a76abe77ed0dcba92b.jpg" alt="Drinks">
+                        </div>
+                        <h4>Drinks</h4>
+                    </div>
+
+                    <!-- 6. Snacks -->
+                    <div class="category-card" onclick="openMenuPage('snacks')">
+                        <div class="img-wrapper">
+                            <img src="https://i.pinimg.com/736x/aa/7e/db/aa7edbedbc41e8809e2d5f947707a9c6.jpg" alt="Snacks">
+                        </div>
+                        <h4>Snacks</h4>
+                    </div>
+
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+
+    <!-- 2. CATEGORY MENU SECTION (SECOND PAGE) -->
+    <div id="menu-page" class="page-section animate-fade" style="display: none;">
+        <section class="menu-section">
+            <div class="menu-container">
+                
+                <!-- Category Title -->
+                <h1 id="category-title" class="menu-title">Category Menu</h1>
+                <p class="menu-subtitle">Explore specific delicious foods for every time of the day!</p>
+
+                <!-- Content Area -->
+                <div class="content-area">
+                    
+                    <!-- 1. BREAKFAST -->
+                    <div id="breakfast" class="category-content">
+                        <div class="recipe-grid">
+                            <div class="recipe-card" onclick="openDetailPage('breakfast')">
+                                <div class="card-img-wrapper">
+                                    <img src="https://i.pinimg.com/736x/8e/f7/2f/8ef72f77d2aa4db8daa990efadc3d253.jpg" alt="Milk Rice">
+                                </div>
+                                <div class="card-body">
+                                    <h3>Sri Lankan Milk Rice (Kiribath)</h3>
+                                    <p>Traditional rice cooked with coconut milk, served with Lunu Miris.</p>
+                                </div>
+                            </div>
+                            <div class="recipe-card" onclick="openDetailPage('breakfast')">
+                                <div class="card-img-wrapper">
+                                    <img src="https://i.pinimg.com/1200x/d9/93/34/d99334d807cd20387bd4d8c7ade15c8c.jpg" alt="Egg Hoppers">
+                                </div>
+                                <div class="card-body">
+                                    <h3>Egg Hoppers</h3>
+                                    <p>Crispy rice flour pancakes with a soft cooked egg center.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. LUNCH -->
+                    <div id="lunch" class="category-content">
+                        <div class="recipe-grid">
+                            <div class="recipe-card" onclick="openDetailPage('lunch')">
+                                <div class="card-img-wrapper">
+                                    <img src="https://i.pinimg.com/736x/d9/96/6b/d9966b3959a0d9fa1d1401bb84b53700.jpg" alt="Rice and Curry">
+                                </div>
+                                <div class="card-body">
+                                    <h3>Traditional Rice & Curry Platter</h3>
+                                    <p>White rice served with spicy chicken curry, dhal, and sambol.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. DINNER -->
+                    <div id="dinner" class="category-content">
+                        <div class="recipe-grid">
+                            <div class="recipe-card" onclick="openDetailPage('dinner')">
+                                <div class="card-img-wrapper">
+                                    <img src="https://i.pinimg.com/1200x/d6/d0/75/d6d0759eea5d87f87488272a9fa5eb71.jpg" alt="Kothu Rotti">
+                                </div>
+                                <div class="card-body">
+                                    <h3>Chicken Kothu Rotti</h3>
+                                    <p>Shredded flatbread chopped on a hot griddle with chicken & veggies.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. DESSERTS -->
+                    <div id="desserts" class="category-content">
+                        <div class="recipe-grid">
+                            <div class="recipe-card" onclick="openDetailPage('desserts')">
+                                <div class="card-img-wrapper">
+                                    <img src="https://i.pinimg.com/1200x/86/67/e6/8667e6d6df88eca115254236e17e1eaa.jpg" alt="Desserts">
+                                </div>
+                                <div class="card-body">
+                                    <h3>Sri Lankan Watalappan</h3>
+                                    <p>Rich custard dessert made with kithul jaggery and coconut milk.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. DRINKS -->
+                    <div id="drinks" class="category-content">
+
+                        <!-- Drinks Sub-Tabs Buttons -->
+                        <div class="sub-tab-buttons">
+                            <button class="sub-btn active" onclick="showDrinkSub('smoothies', this)">Smoothies</button>
+                            <button class="sub-btn" onclick="showDrinkSub('mojito', this)">Mojito</button>
+                            <button class="sub-btn" onclick="showDrinkSub('freshjuice', this)">Fresh Juice</button>
+                        </div>
+
+                        <!-- Smoothies Cards -->
+                        <div id="smoothies-sub" class="drink-sub-content">
+                            <div class="recipe-grid">
+                                <div class="recipe-card" onclick="openDetailPage('drinks')">
+                                    <div class="card-img-wrapper">
+                                        <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=80" alt="Smoothie">
+                                    </div>
+                                    <div class="card-body">
+                                        <h3>Blueberry Protein Smoothie</h3>
+                                        <p>Blended with protein, yogurt and forest blueberries.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Mojito Cards -->
+                        <div id="mojito-sub" class="drink-sub-content" style="display: none;">
+                            <div class="recipe-grid">
+                                <div class="recipe-card" onclick="openDetailPage('drinks')">
+                                    <div class="card-img-wrapper">
+                                        <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=600&q=80" alt="Mojito">
+                                    </div>
+                                    <div class="card-body">
+                                        <h3>Classic Mint Lime Mojito</h3>
+                                        <p>A fizzy, cool and refreshing soda beverage infused with fresh garden mint leaves.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Fresh Juice Cards -->
+                        <div id="freshjuice-sub" class="drink-sub-content" style="display: none;">
+                            <div class="recipe-grid">
+                                <div class="recipe-card" onclick="openDetailPage('drinks')">
+                                    <div class="card-img-wrapper">
+                                        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" alt="Juice">
+                                    </div>
+                                    <div class="card-body">
+                                        <h3>Fresh Strawberry Juice</h3>
+                                        <p>Handpicked organic strawberries blended smoothly with lime juice and ice.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <!-- 6. SNACKS -->
+                    <div id="snacks" class="category-content">
+                        <div class="recipe-grid">
+                            <div class="recipe-card" onclick="openDetailPage('snacks')">
+                                <div class="card-img-wrapper">
+                                    <img src="https://i.pinimg.com/1200x/d8/8c/f0/d88cf02ee4547838432e8d601aa462b1.jpg" alt="Snacks">
+                                </div>
+                                <div class="card-body">
+                                    <h3>Spicy Dhal Vade</h3>
+                                    <p>Crunchy tea-time snack made of split chickpeas and curry leaves.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Back Button -->
+                <div class="back-home-wrapper">
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="goBack()">‹ Back</a>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+
+    <!-- 3. RECIPE DETAILS SECTION (Box Layout Only) -->
+    <div id="details-page" class="page-section animate-fade" style="display: none;">
+        <section class="details-section">
+            <div class="details-container">
+                
+                <!-- Dynamic Main Title -->
+                <h1 id="recipe-main-title" class="details-title">Recipe Details</h1>
+                <p class="details-subtitle">Step-by-step guides and delicious configurations for your meal!</p>
+
+                <!-- Content Area -->
+                <div class="details-content-area">
+                    
+                    <!-- 1. DRINKS SUB-CATEGORIES -->
+                    <div id="drinks-recipes" class="category-detail-group" style="display: none;">
+                        <div class="recipe-detail-card no-img-card">
+                            <div class="card-info">
+                                <h2>Blueberry Protein Smoothie</h2>
+                                <p class="desc">A healthy and energetic breakfast smoothie packed with wild forest blueberries and Greek yogurt.</p>
+                                <h4>Ingredients:</h4>
+                                <ul>
+                                    <li>1 cup Fresh/Frozen Blueberries</li>
+                                    <li>1 scoop Vanilla Protein Powder</li>
+                                    <li>1/2 cup Greek Yogurt & Almond Milk</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. BREAKFAST RECIPES -->
+                    <div id="breakfast-recipes" class="category-detail-group" style="display: none;">
+                        <div class="recipe-detail-card no-img-card">
+                            <div class="card-info">
+                                <h2>Sri Lankan Milk Rice (Kiribath)</h2>
+                                <p class="desc">Traditional coconut milk rice cooked during special celebrations and traditional tomorrows.</p>
+                                <h4>Ingredients:</h4>
+                                <ul>
+                                    <li>2 cups White Raw Rice</li>
+                                    <li>2 cups Thick Coconut Milk</li>
+                                    <li>Salt to taste</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. LUNCH RECIPES -->
+                    <div id="lunch-recipes" class="category-detail-group" style="display: none;">
+                        <div class="recipe-detail-card no-img-card">
+                            <div class="card-info">
+                                <h2>Traditional Rice & Chicken Curry Platter</h2>
+                                <p class="desc">A grand meal platter featuring hot rice, rich chicken curry, dhal curry, and fresh sambol.</p>
+                                <h4>Ingredients:</h4>
+                                <ul>
+                                    <li>Steamed Samba Rice</li>
+                                    <li>Spicy Roasted Chicken Gravy</li>
+                                    <li>Coconut Dhal Curry & Gotukola Sambol</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. DINNER RECIPES -->
+                    <div id="dinner-recipes" class="category-detail-group" style="display: none;">
+                        <div class="recipe-detail-card no-img-card">
+                            <div class="card-info">
+                                <h2>Chicken Kothu Rotti</h2>
+                                <p class="desc">Popular street food prepared by chopping flatbread with eggs, veggies, chicken curry, and spices.</p>
+                                <h4>Ingredients:</h4>
+                                <ul>
+                                    <li>3 Shredded Parothas</li>
+                                    <li>2 Eggs & Chicken Curry Pieces</li>
+                                    <li>Chopped Onions, Leeks & Cabbage</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 5. DESSERTS RECIPES -->
+                    <div id="desserts-recipes" class="category-detail-group" style="display: none;">
+                        <div class="recipe-detail-card no-img-card">
+                            <div class="card-info">
+                                <h2>Sri Lankan Watalappan</h2>
+                                <p class="desc">A steamed jaggery and coconut milk pudding spiced with nutmeg, cardamom, and cashews.</p>
+                                <h4>Ingredients:</h4>
+                                <ul>
+                                    <li>250g Dark Kithul Jaggery</li>
+                                    <li>5 Whole Eggs</li>
+                                    <li>1 cup Thick Coconut Milk & Cashews</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 6. SNACKS RECIPES -->
+                    <div id="snacks-recipes" class="category-detail-group" style="display: none;">
+                        <div class="recipe-detail-card no-img-card">
+                            <div class="card-info">
+                                <h2>Spicy Dhal Vade (Parippu Vade)</h2>
+                                <p class="desc">Deep-fried crisp tea-time snack made with coarsely ground chana dhal, chili, and fresh curry leaves.</p>
+                                <h4>Ingredients:</h4>
+                                <ul>
+                                    <li>2 cups Chana Dhal (soaked)</li>
+                                    <li>Dried Red Chilies & Green Chilies</li>
+                                    <li>Finely chopped Onions & Curry Leaves</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Back Button -->
+                <div class="back-home-wrapper">
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="goBack()">‹ Back</a>
+                </div>
+
+            </div>
+        </section>
+    </div>
+
+
+    <!-- BOOTSTRAP MODAL -->
+    <div class="modal fade" id="signInModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Sign In to Yummy.lk</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="loginForm" novalidate>
+                        <div class="mb-3 text-start">
+                            <label class="form-label fw-semibold">Email Address</label>
+                            <input type="email" class="form-control" id="emailInput" placeholder="name@example.com" required>
+                            <div class="invalid-feedback">Please enter a valid email address.</div>
+                        </div>
+                        <div class="mb-3 text-start">
+                            <label class="form-label fw-semibold">Password</label>
+                            <input type="password" class="form-control" id="passwordInput" placeholder="Enter password" required minlength="6">
+                            <div class="invalid-feedback">Password must be at least 6 characters long.</div>
+                        </div>
+                        <button type="submit" class="btn text-white w-100 fw-bold py-2 mt-2" style="background-color: var(--main-color);">Sign In</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- FOOTER SECTION -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                
+                <div class="footer-col brand-col">
+                    <h2 class="footer-logo">Yummy.lk</h2>
+                    <p class="info-label"><strong>Address:</strong></p>
+                    <p class="info-text">Rajarata University, Mihintale, Sri Lanka.</p>
+                    <p class="info-label"><strong>Contact:</strong></p>
+                    <p class="info-text">0742921954 | hello@yummy.lk</p>
+                </div>
+
+                <div class="footer-col links-col">
+                    
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="switchPage('home')">Home Page</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('breakfast')">Breakfast</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('lunch')">Lunch</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('dinner')">Dinner</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col links-col">
+                    
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('desserts')">Desserts</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('drinks')">Drinks</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('snacks')">Snacks</a></li>
+                    </ul>
+                </div>
+
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Yummy.lk. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- JS Link -->
+    <script src="script.js"></script>
+</body>
+</html>
