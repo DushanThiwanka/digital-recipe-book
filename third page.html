@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipe Details - Yummy.lk</title>
+    <!-- External CSS link -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!--  3rd PAGE: RECIPE DETAILS SECTION  -->
+    <section class="details-section">
+        <div class="details-container">
+            
+            <!-- Dynamic Main Title -->
+            <h1 id="recipe-main-title" class="details-title">Recipe Details</h1>
+            <p class="details-subtitle">Step-by-step guides and delicious configurations for your meal!</p>
+
+            <!--  -->
+            <div id="drinks-sub-tabs" class="sub-tab-buttons" style="display: none;">
+                <button class="sub-btn active" onclick="showDrinkSub('smoothies', this)">Smoothies</button>
+                <button class="sub-btn" onclick="showDrinkSub('mojito', this)">Mojito</button>
+                <button class="sub-btn" onclick="showDrinkSub('freshjuice', this)">Fresh Juice</button>
+            </div>
+
+            <!-- Content Area -->
+            <div class="details-content-area">
+                
+                <!-- 1. DRINKS SUB-CATEGORIES -->
+                <div id="drinks-recipes" class="category-detail-group" style="display: none;">
+                    
+                    <!-- Smoothies -->
+                    <div id="smoothies-sub" class="drink-sub-content">
+                        <div class="recipe-detail-card">
+                            <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=80" alt="Smoothie">
+                            <div class="card-info">
+                                <h2>Blueberry Protein Smoothie</h2>
+                                <p class="desc">A healthy and energetic breakfast smoothie packed with wild forest blueberries and Greek yogurt.</p>
+                                <h4>Ingredients:</h4>
+                                <ul>
+                                    <li>1 cup Fresh/Frozen Blueberries</li>
+                                    <li>1 scoop Vanilla Protein Powder</li>
+                                    <li>1/2 cup Greek Yogurt & Almond Milk</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Mojito -->
+                    <div id="mojito-sub" class="drink-sub-content" style="display: none;">
+                        <div class="recipe-detail-card">
+                            <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=600&q=80" alt="Mojito">
+                            <div class="card-info">
+                                <h2>Classic Mint Lime Mojito</h2>
+                                <p class="desc">A fizzy, cool and refreshing soda beverage infused with fresh garden mint leaves and crushed ice.</p>
+                                <h4>Ingredients:</h4>
+                                <ul>
+                                    <li>10 Fresh Mint Leaves</li>
+                                    <li>1/2 Lime (cut into wedges)</li>
+                                    <li>Chilled Soda Water & Sugar syrup</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Fresh Juice -->
+                    <div id="freshjuice-sub" class="drink-sub-content" style="display: none;">
+                        <div class="recipe-detail-card">
+                            <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" alt="Juice">
+                            <div class="card-info">
+                                <h2 style="color: #e53935;">Fresh Strawberry Juice</h2>
+                                <p class="desc">Handpicked organic strawberries blended smoothly with lime juice and ice for hot summer days.</p>
+                                <h4>Ingredients:</h4>
+                                <ul>
+                                    <li>200g Fresh Strawberries</li>
+                                    <li>1 tbsp Lime Juice</li>
+                                    <li>Crushed Ice & Honey/Sugar</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <!-- 2. BREAKFAST RECIPES -->
+                <div id="breakfast-recipes" class="category-detail-group" style="display: none;">
+                    <div class="recipe-detail-card">
+                        <img src="https://images.unsplash.com/photo-1533089860892-a7c6f0a88666?auto=format&fit=crop&w=600&q=80" alt="Kiribath">
+                        <div class="card-info">
+                            <h2>Sri Lankan Milk Rice (Kiribath)</h2>
+                            <p class="desc">Traditional coconut milk rice cooked during special celebrations and traditional tomorrows.</p>
+                            <h4>Ingredients:</h4>
+                            <ul>
+                                <li>2 cups White Raw Rice</li>
+                                <li>2 cups Thick Coconut Milk</li>
+                                <li>Salt to taste</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 3. LUNCH RECIPES -->
+                <div id="lunch-recipes" class="category-detail-group" style="display: none;">
+                    <div class="recipe-detail-card">
+                        <img src="https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=600&q=80" alt="Rice and Curry">
+                        <div class="card-info">
+                            <h2>Traditional Rice & Chicken Curry Platter</h2>
+                            <p class="desc">A grand meal platter featuring hot rice, rich chicken curry, dhal curry, and fresh sambol.</p>
+                            <h4>Ingredients:</h4>
+                            <ul>
+                                <li>Steamed Samba Rice</li>
+                                <li>Spicy Roasted Chicken Gravy</li>
+                                <li>Coconut Dhal Curry & Gotukola Sambol</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 4. DINNER RECIPES -->
+                <div id="dinner-recipes" class="category-detail-group" style="display: none;">
+                    <div class="recipe-detail-card">
+                        <img src="https://images.unsplash.com/photo-1565557623262-b51c2513a641?auto=format&fit=crop&w=600&q=80" alt="Kothu">
+                        <div class="card-info">
+                            <h2>Chicken Kothu Rotti</h2>
+                            <p class="desc">Popular street food prepared by chopping flatbread with eggs, veggies, chicken curry, and spices.</p>
+                            <h4>Ingredients:</h4>
+                            <ul>
+                                <li>3 Shredded Parothas</li>
+                                <li>2 Eggs & Chicken Curry Pieces</li>
+                                <li>Chopped Onions, Leeks & Cabbage</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 5. DESSERTS RECIPES -->
+                <div id="desserts-recipes" class="category-detail-group" style="display: none;">
+                    <div class="recipe-detail-card">
+                        <img src="https://images.unsplash.com/photo-1587314168485-3236d6710814?auto=format&fit=crop&w=600&q=80" alt="Watalappan">
+                        <div class="card-info">
+                            <h2>Sri Lankan Watalappan</h2>
+                            <p class="desc">A steamed jaggery and coconut milk pudding spiced with nutmeg, cardamom, and cashews.</p>
+                            <h4>Ingredients:</h4>
+                            <ul>
+                                <li>250g Dark Kithul Jaggery</li>
+                                <li>5 Whole Eggs</li>
+                                <li>1 cup Thick Coconut Milk & Cashews</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+
+                <!-- 6. SNACKS RECIPES -->
+                <div id="snacks-recipes" class="category-detail-group" style="display: none;">
+                    <div class="recipe-detail-card">
+                        <img src="https://images.unsplash.com/photo-1599487488170-d11ec9c172f0?auto=format&fit=crop&w=600&q=80" alt="Vade">
+                        <div class="card-info">
+                            <h2>Spicy Dhal Vade (Parippu Vade)</h2>
+                            <p class="desc">Deep-fried crisp tea-time snack made with coarsely ground chana dhal, chili, and fresh curry leaves.</p>
+                            <h4>Ingredients:</h4>
+                            <ul>
+                                <li>2 cups Chana Dhal (soaked)</li>
+                                <li>Dried Red Chilies & Green Chilies</li>
+                                <li>Finely chopped Onions & Curry Leaves</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Back to Home Button -->
+            <div class="back-home-wrapper">
+                <a href="index.html" class="back-home-btn">Back to Home</a>
+            </div>
+
+        </div>
+    </section>
+
+    
+    <script>
+        
+        function showDrinkSub(subId, btn) {
+            document.querySelectorAll('.drink-sub-content').forEach(el => el.style.display = 'none');
+            document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
+
+            document.getElementById(subId + '-sub').style.display = 'block';
+            btn.classList.add('active');
+        }
+
+        
+        window.onload = function() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const type = urlParams.get('type') || 'drinks'; // default drinks
+
+            // Hide all main groups
+            document.querySelectorAll('.category-detail-group').forEach(g => g.style.display = 'none');
+
+            // Set main title
+            document.getElementById('recipe-main-title').innerText = type.charAt(0).toUpperCase() + type.slice(1) + " Recipe Guide";
+
+            if (type === 'drinks') {
+                document.getElementById('drinks-sub-tabs').style.display = 'flex';
+                document.getElementById('drinks-recipes').style.display = 'block';
+            } else {
+                document.getElementById('drinks-sub-tabs').style.display = 'none';
+                const targetSec = document.getElementById(type + '-recipes');
+                if (targetSec) targetSec.style.display = 'block';
+            }
+        };
+    </script>
+
+</body>
+</html>
