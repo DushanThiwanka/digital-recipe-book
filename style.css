@@ -333,7 +333,7 @@ nav.navbar {
     background-color: var(--dark-btn-bg);
 }
 
-/* 3rd PAGE (RECIPE DETAILS)  */
+/* 3rd PAGE (RECIPE DETAILS) STYLES */
 .details-section {
     padding: 60px 20px;
     background-color: var(--card-bg);
@@ -384,7 +384,7 @@ nav.navbar {
     color: var(--bg-color);
 }
 
-
+/* Text Box Card Layout without Images */
 .recipe-detail-card.no-img-card {
     display: block;
     background: var(--card-bg);
@@ -534,9 +534,7 @@ nav.navbar {
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* 
-   RESPONSIVE DESIGN */
-
+/* RESPONSIVE DESIGN */
 @media (max-width: 768px) {
     nav.navbar {
         padding: 15px 20px;
@@ -546,7 +544,6 @@ nav.navbar {
         display: block;
     }
 
-    /* Mobile Menu - Contains Links and Sign In button */
     .nav-links {
         position: absolute;
         top: 100%;
