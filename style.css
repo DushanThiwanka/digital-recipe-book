@@ -11,6 +11,9 @@
 
 :root {
     --main-color: #c60c0c;
+    --main-hover: #a10909;
+    --main-light: #fef2f2;
+    --main-border: #fecaca;
     --secondary-color: #939597;
     --text-color: #1a0404;
     --bg-color: #ffffff;
@@ -22,20 +25,26 @@
     --desc-color: #666666;
 }
 
-/* Navigation Bar (Desktop Styling) */
+.dp-announcement-bar {
+    background-color: #8b0808;
+    color: #ffffff;
+    font-size: 13px;
+    font-weight: 600;
+}
+
 nav.navbar {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 15px 60px;
-    background-color: var(--bg-color);
-    border-bottom: 1px solid var(--border-color);
+    background: #ffffff;
+    border-bottom: 2px solid var(--main-color);
+    box-shadow: 0 4px 15px rgba(198, 12, 12, 0.05);
     position: sticky;
     top: 0;
     z-index: 1000;
 }
 
-/* Left: Logo Style */
 .navbar .logo {
     font-family: 'Georgia', 'Times New Roman', serif;
     font-style: italic;
@@ -46,7 +55,6 @@ nav.navbar {
     flex: 1;
 }
 
-/* Links Container Layout for Desktop */
 .nav-links {
     display: flex;
     align-items: center;
@@ -67,11 +75,10 @@ nav.navbar {
     color: var(--main-color);
 }
 
-/* Right: Sign In Button Styling */
 .signin-btn {
-    background-color: transparent;
-    color: var(--text-color);
-    border: 1px solid var(--dark-btn-bg);
+    background-color: var(--main-color);
+    color: #ffffff;
+    border: 1px solid var(--main-color);
     padding: 8px 24px;
     font-size: 15px;
     font-weight: 600;
@@ -82,11 +89,21 @@ nav.navbar {
 }
 
 .signin-btn:hover {
-    background-color: var(--text-color);
-    color: var(--bg-color);
+    background-color: var(--main-hover);
+    border-color: var(--main-hover);
+    color: #ffffff;
 }
 
-/* Hide Mobile Menu Icon on Desktop */
+.dp-user-badge-btn {
+    background: var(--main-light);
+    border: 1px solid var(--main-border);
+    color: var(--main-color);
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
 #menu-icon {
     font-size: 32px;
     color: var(--text-color);
@@ -94,9 +111,8 @@ nav.navbar {
     display: none;
 }
 
-/* Main Hero Section */
 .hero {
-    background-image: linear-gradient(rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.3)), url('https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=1200&q=80');
+    background-image: linear-gradient(rgba(0, 0, 0, 0.35), rgba(0, 0, 0, 0.35)), url('https://images.unsplash.com/photo-1464965911861-746a04b4bca6?auto=format&fit=crop&w=1200&q=80');
     background-size: cover;
     background-position: center;
     height: calc(100vh - 60px);
@@ -129,7 +145,6 @@ nav.navbar {
     margin-bottom: 30px;
 }
 
-/* Search Bar Setup */
 .search-box {
     display: flex;
     width: 100%;
@@ -160,10 +175,9 @@ nav.navbar {
 }
 
 .search-box button:hover {
-    background-color: var(--main-color);
+    background-color: var(--main-hover);
 }
 
-/* Category Section */
 .category-section {
     padding: 60px 20px;
     background-color: var(--bg-color);
@@ -188,7 +202,6 @@ nav.navbar {
     margin-bottom: 45px;
 }
 
-/* Flexbox Layout */
 .category-grid {
     display: flex;
     justify-content: center;
@@ -215,7 +228,7 @@ nav.navbar {
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.img-wrapper img {
+.img-wrapper img, .card-img-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -224,7 +237,7 @@ nav.navbar {
 
 .category-card:hover .img-wrapper {
     transform: translateY(-5px);
-    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 18px rgba(198, 12, 12, 0.2);
 }
 
 .category-card h4 {
@@ -233,7 +246,53 @@ nav.navbar {
     color: var(--text-color);
 }
 
-/* 2nd PAGE (CATEGORY MENU) STYLES */
+.dp-metrics-section {
+    background-color: #ffffff;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.dp-metric-box {
+    border-radius: 12px;
+    background: var(--main-light);
+    border: 1px solid var(--main-border);
+    transition: transform 0.2s ease;
+}
+
+.dp-metric-box:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 6px 16px rgba(198, 12, 12, 0.08);
+}
+
+.dp-course-card {
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    transition: transform 0.3s ease;
+}
+
+.dp-course-card:hover {
+    transform: translateY(-5px);
+}
+
+.dp-course-thumbnail {
+    position: relative;
+    height: 190px;
+    overflow: hidden;
+}
+
+.dp-course-badge {
+    position: absolute;
+    bottom: 12px;
+    left: 12px;
+    font-size: 11px;
+    padding: 5px 10px;
+    border-radius: 4px;
+}
+
+.dp-app-banner {
+    background: linear-gradient(135deg, var(--main-color) 0%, #8b0808 100%);
+}
+
 .menu-section {
     padding: 60px 20px;
     background-color: var(--bg-color);
@@ -247,7 +306,7 @@ nav.navbar {
 }
 
 .menu-title {
-    font-size: 36px;
+    font-size: 40px;
     font-weight: 800;
     color: var(--box-shadow);
     margin-bottom: 8px;
@@ -259,9 +318,33 @@ nav.navbar {
     margin-bottom: 35px;
 }
 
-/* Recipe Content & Grid */
 .category-content {
     display: none;
+}
+
+.sub-tab-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+}
+
+.sub-btn {
+    background-color: #ffffff;
+    color: var(--main-color);
+    border: 1.5px solid var(--main-color);
+    padding: 10px 28px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.sub-btn:hover, .sub-btn.active {
+    background-color: var(--main-color) !important;
+    color: #ffffff !important;
 }
 
 .recipe-grid {
@@ -278,21 +361,15 @@ nav.navbar {
     border-radius: 12px;
     overflow: hidden;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-    border: 1px solid var(--secondary-color);
+    border: 1px solid var(--border-color);
     text-align: left;
     cursor: pointer;
 }
 
 .card-img-wrapper {
     width: 100%;
-    height: 220px;
+    height: 230px;
     overflow: hidden;
-}
-
-.card-img-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
 }
 
 .card-body {
@@ -300,7 +377,7 @@ nav.navbar {
 }
 
 .card-body h3 {
-    font-size: 18px;
+    font-size: 20px;
     font-weight: bold;
     color: var(--box-shadow);
     margin-bottom: 8px;
@@ -312,17 +389,16 @@ nav.navbar {
     line-height: 1.5;
 }
 
-/* Back Button */
 .back-home-wrapper {
     margin-top: 50px;
 }
 
 .back-home-btn {
     display: inline-block;
-    background-color: var(--box-shadow);
-    color: var(--bg-color);
+    background-color: #000000;
+    color: #ffffff;
     text-decoration: none;
-    padding: 12px 35px;
+    padding: 12px 36px;
     font-size: 15px;
     font-weight: bold;
     border-radius: 6px;
@@ -331,9 +407,9 @@ nav.navbar {
 
 .back-home-btn:hover {
     background-color: var(--dark-btn-bg);
+    color: #ffffff;
 }
 
-/* 3rd PAGE (RECIPE DETAILS) STYLES */
 .details-section {
     padding: 60px 20px;
     background-color: var(--card-bg);
@@ -347,7 +423,7 @@ nav.navbar {
 }
 
 .details-title {
-    font-size: 36px;
+    font-size: 42px;
     font-weight: 800;
     color: var(--heading-color);
     margin-bottom: 8px;
@@ -359,51 +435,25 @@ nav.navbar {
     margin-bottom: 35px;
 }
 
-.sub-tab-buttons {
-    display: flex;
-    justify-content: center;
-    gap: 15px;
-    margin-bottom: 40px;
-    flex-wrap: wrap;
-}
-
-.sub-btn {
-    background-color: transparent;
-    color: var(--main-color);
-    border: 1.5px solid var(--main-color);
-    padding: 10px 26px;
-    font-size: 15px;
-    font-weight: bold;
-    border-radius: 30px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.sub-btn:hover, .sub-btn.active {
-    background-color: var(--main-color);
-    color: var(--bg-color);
-}
-
-/* Text Box Card Layout without Images */
 .recipe-detail-card.no-img-card {
     display: block;
     background: var(--card-bg);
     border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
     border: 1px solid var(--border-color);
     text-align: left;
     margin: 0 auto;
     width: 100%;
-    max-width: 700px;
+    max-width: 780px;
 }
 
 .no-img-card .card-info {
-    padding: 35px 40px;
+    padding: 40px 45px;
     width: 100%;
 }
 
 .card-info h2 {
-    font-size: 26px;
+    font-size: 28px;
     font-weight: bold;
     color: var(--heading-color);
     margin-bottom: 12px;
@@ -430,10 +480,91 @@ nav.navbar {
     padding-left: 20px;
     color: var(--desc-color);
     font-size: 15px;
-    line-height: 1.8;
+    line-height: 1.9;
+    list-style-type: disc;
 }
 
-/* Footer Section */
+/* Modals Styling */
+.dp-auth-card {
+    border-radius: 14px;
+    border: none;
+    box-shadow: 0 15px 35px rgba(198, 12, 12, 0.15);
+    overflow: hidden;
+}
+
+.dp-logo-circle {
+    width: 52px;
+    height: 52px;
+    background: var(--main-light);
+    color: var(--main-color);
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    font-size: 26px;
+}
+
+.dp-pills {
+    background-color: #f5f5f5;
+    border-radius: 30px;
+    padding: 4px;
+}
+
+.dp-pills .nav-link {
+    color: #555555;
+    font-weight: 600;
+    font-size: 14px;
+    border-radius: 25px;
+    padding: 8px 18px;
+    transition: all 0.2s ease;
+}
+
+.dp-pills .nav-link.active {
+    background-color: var(--main-color) !important;
+    color: #ffffff !important;
+    box-shadow: 0 4px 10px rgba(198, 12, 12, 0.25);
+}
+
+.dp-btn-primary {
+    background: var(--main-color) !important;
+    color: #ffffff !important;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: background-color 0.2s ease;
+}
+
+.dp-btn-primary:hover {
+    background: var(--main-hover) !important;
+    color: #ffffff !important;
+}
+
+.dp-auth-card .form-control:focus,
+.dp-auth-card .form-select:focus {
+    border-color: var(--main-color);
+    box-shadow: 0 0 0 0.2rem rgba(198, 12, 12, 0.15);
+}
+
+.dp-profile-avatar {
+    width: 85px;
+    height: 85px;
+    border-radius: 50%;
+    border: 3px solid var(--main-light);
+    object-fit: cover;
+}
+
+.dp-info-tile {
+    background: #fffbfa;
+    border: 1px solid #ffdede;
+    border-radius: 10px;
+    border-left: 4px solid var(--main-color);
+}
+
+.dp-contact-info-panel {
+    background: #fff8f8;
+    border: 1px solid #ffd8d8;
+}
+
 .site-footer {
     background-color: var(--bg-color);
     border-top: 1px solid var(--border-color);
@@ -460,26 +591,27 @@ nav.navbar {
     flex: 1;
     min-width: 280px;
     margin-bottom: 20px;
+    text-align: left;
 }
 
 .footer-logo {
     color: var(--main-color);
     font-family: 'Times New Roman', Times, serif;
     font-style: italic;
-    font-size: 32px;
+    font-size: 36px;
     font-weight: bold;
     margin-bottom: 20px;
 }
 
 .info-label {
-    color: var(--box-shadow);
+    color: #000000;
     font-size: 14px;
     font-weight: bold;
     margin-top: 10px;
 }
 
 .info-text {
-    color: var(--box-shadow);
+    color: #000000;
     font-size: 14px;
     line-height: 1.5;
     margin-bottom: 8px;
@@ -488,14 +620,7 @@ nav.navbar {
 .links-col {
     width: 180px;
     margin-bottom: 20px;
-}
-
-.column-title {
-    font-size: 15px;
-    font-weight: 800;
-    color: var(--box-shadow);
-    margin-bottom: 18px;
-    letter-spacing: 0.5px;
+    text-align: left;
 }
 
 .footer-links {
@@ -508,7 +633,7 @@ nav.navbar {
 
 .footer-links a {
     text-decoration: none;
-    color: var(--box-shadow);
+    color: #000000;
     font-size: 14px;
     transition: color 0.2s ease;
 }
@@ -518,26 +643,44 @@ nav.navbar {
 }
 
 .footer-bottom {
-    border-top: 1px solid var(--secondary-color);
+    border-top: 1px solid var(--border-color);
     padding-top: 25px;
     font-size: 14px;
+    text-align: left;
     color: var(--secondary-color);
 }
 
-/* Custom Fade Animation */
 .animate-fade {
-    animation: fadeIn 0.4s ease-in-out;
+    animation: fadeIn 0.3s ease-in-out;
 }
 
 @keyframes fadeIn {
-    from { opacity: 0; transform: translateY(8px); }
+    from { opacity: 0; transform: translateY(6px); }
     to { opacity: 1; transform: translateY(0); }
 }
 
-/* RESPONSIVE DESIGN */
-@media (max-width: 768px) {
+/* ========================================================= */
+/* COMPREHENSIVE RESPONSIVE DESIGN (Tablets & Mobile Screens)*/
+/* ========================================================= */
+@media (max-width: 992px) {
     nav.navbar {
-        padding: 15px 20px;
+        padding: 15px 30px;
+    }
+    .nav-links {
+        gap: 20px;
+    }
+    .category-card {
+        min-width: 140px;
+    }
+}
+
+@media (max-width: 768px) {
+    .dp-announcement-bar {
+        font-size: 11px;
+    }
+
+    nav.navbar {
+        padding: 12px 20px;
     }
 
     #menu-icon {
@@ -550,13 +693,17 @@ nav.navbar {
         left: 0;
         width: 100%;
         padding: 25px 0;
-        background-color: var(--bg-color);
-        border-bottom: 1px solid var(--border-color);
+        background-color: #ffffff;
+        border-bottom: 2px solid var(--main-color);
         flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 18px;
         display: none;
-        box-shadow: 0 10px 15px rgba(0, 0, 0, 0.08);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    }
+
+    .nav-links.active {
+        display: flex;
     }
 
     .signin-btn {
@@ -565,13 +712,9 @@ nav.navbar {
         text-align: center;
     }
 
-    .nav-links.active {
-        display: flex;
-    }
-
     .hero {
         height: auto;
-        min-height: 400px;
+        min-height: 480px;
         padding: 60px 20px;
     }
 
@@ -581,6 +724,7 @@ nav.navbar {
 
     .hero p {
         font-size: 1rem;
+        margin-bottom: 20px;
     }
 
     .search-box {
@@ -588,27 +732,42 @@ nav.navbar {
         bottom: auto;
         flex-direction: column;
         gap: 10px;
-        margin-top: 20px;
+        margin-top: 15px;
+        max-width: 100%;
     }
 
     .search-box input {
-        border-radius: 4px;
+        border-radius: 6px;
         width: 100%;
+        padding: 12px 16px;
     }
 
     .search-box button {
-        border-radius: 4px;
+        border-radius: 6px;
         width: 100%;
         padding: 12px;
     }
 
+    .category-section, .menu-section, .details-section {
+        padding: 40px 15px;
+    }
+
+    .category-title, .menu-title, .details-title {
+        font-size: 28px;
+    }
+
+    .category-subtitle, .menu-subtitle, .details-subtitle {
+        font-size: 14px;
+        margin-bottom: 25px;
+    }
+
     .category-grid {
-        gap: 15px;
+        gap: 12px;
     }
 
     .category-card {
-        min-width: 130px;
-        max-width: 45%;
+        min-width: 45%;
+        max-width: 48%;
     }
 
     .img-wrapper {
@@ -616,7 +775,7 @@ nav.navbar {
     }
 
     .recipe-grid {
-        gap: 15px;
+        gap: 20px;
     }
 
     .recipe-card {
@@ -624,7 +783,21 @@ nav.navbar {
     }
 
     .card-img-wrapper {
-        height: 180px;
+        height: 200px;
+    }
+
+    .sub-tab-buttons {
+        gap: 10px;
+        margin-bottom: 25px;
+    }
+
+    .sub-btn {
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+
+    .recipe-detail-card.no-img-card {
+        margin: 0 10px;
     }
 
     .no-img-card .card-info {
@@ -633,6 +806,34 @@ nav.navbar {
 
     .card-info h2 {
         font-size: 22px;
+    }
+
+    .card-info .desc {
+        font-size: 14px;
+    }
+
+    .card-info ul {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .back-home-btn {
+        width: 80%;
+        padding: 12px 0;
+    }
+
+    /* Modal Mobile Responsive Adjustments */
+    .modal-dialog {
+        margin: 15px;
+    }
+
+    .dp-auth-card .modal-body {
+        padding: 20px 15px !important;
+    }
+
+    .dp-pills .nav-link {
+        padding: 8px 12px;
+        font-size: 13px;
     }
 
     .footer-row {
@@ -652,12 +853,20 @@ nav.navbar {
         max-width: 100%;
     }
 
-    .details-title, .menu-title {
-        font-size: 26px;
+    .hero h1 {
+        font-size: 1.8rem;
     }
 
-    .back-home-btn {
+    .category-title, .menu-title, .details-title {
+        font-size: 24px;
+    }
+
+    .sub-tab-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .sub-btn {
         width: 100%;
-        text-align: center;
     }
 }

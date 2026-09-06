@@ -1,211 +1,244 @@
 let pageHistory = ['home'];
+let currentLoadedRecipes = [];
 
-// Dynamic Content Updates & Navigation Stack
 function switchPage(pageId, isBack = false) {
     document.querySelectorAll('.page-section').forEach(sec => sec.style.display = 'none');
     
-    if (pageId === 'home') {
-        document.getElementById('home-page').style.display = 'block';
-    } else if (pageId === 'menu') {
-        document.getElementById('menu-page').style.display = 'block';
-    } else if (pageId === 'details') {
-        document.getElementById('details-page').style.display = 'block';
-    }
+    if (pageId === 'home') document.getElementById('home-page').style.display = 'block';
+    else if (pageId === 'menu') document.getElementById('menu-page').style.display = 'block';
+    else if (pageId === 'details') document.getElementById('details-page').style.display = 'block';
     
     if (!isBack && pageHistory[pageHistory.length - 1] !== pageId) {
         pageHistory.push(pageId);
     }
-
     window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
-// Go Back Functionality
 function goBack() {
     if (pageHistory.length > 1) {
         pageHistory.pop();
-        const previousPage = pageHistory[pageHistory.length - 1];
-        switchPage(previousPage, true);
+        switchPage(pageHistory[pageHistory.length - 1], true);
     } else {
         switchPage('home', true);
     }
 }
 
-// 2 වන පිටුවට යෑම සහ අදාළ කැටගරිය පෙන්වීම
+// Recipes API Call
 function openMenuPage(categoryName) {
     switchPage('menu');
-    showCategory(categoryName);
-}
+    document.getElementById('category-title').innerText = categoryName.charAt(0).toUpperCase() + categoryName.slice(1) + " Menu";
 
-// 2 වන පිටුවේ කැටගරිය Filter කිරීම
-function showCategory(catId) {
-    // 1. 2nd page එකේ සියලුම cards පෙන්වන්න
-    document.querySelectorAll('#menu-page .recipe-card').forEach(card => card.style.display = 'block');
-    
-    // 2. Drinks Sub-tabs මුලින්ම සඟවන්න
-    const subTabBtns = document.querySelector('#drinks .sub-tab-buttons');
-    if (subTabBtns) subTabBtns.style.display = 'none';
-
-    document.querySelectorAll('#menu-page .category-content').forEach(c => {
-        c.style.display = 'none';
-    });
-
-    // 3. තේරූ category එක විතරක් පෙන්වන්න
-    const activeSec = document.getElementById(catId);
-    if (activeSec) {
-        activeSec.style.display = 'block';
-    }
-
-    // 4. මාතෘකාව වෙනස් කරන්න
-    const titleElem = document.getElementById('category-title');
-    if (titleElem) {
-        titleElem.innerText = catId.charAt(0).toUpperCase() + catId.slice(1) + " Menu";
-    }
-
-    // Drinks කැටගරිය විතරක් තේරුවොත් Sub-tab buttons පෙන්වන්න
-    if (catId === 'drinks') {
-        if (subTabBtns) subTabBtns.style.display = 'flex';
-        showDrinkSub('smoothies');
-    }
-}
-
-// 3 වන පිටුවට යෑම (Recipe Details Page)
-function openDetailPage(type) {
-    switchPage('details');
-
-    document.querySelectorAll('.category-detail-group').forEach(g => g.style.display = 'none');
-    
-    const titleElem = document.getElementById('recipe-main-title');
-    if (titleElem) {
-        titleElem.innerText = type.charAt(0).toUpperCase() + type.slice(1) + " Recipe Guide";
-    }
-
-    const targetSec = document.getElementById(type + '-recipes');
-    if (targetSec) {
-        targetSec.style.display = 'block';
-    }
-}
-
-// Drinks Sub-tabs switching
-function showDrinkSub(subId, btn) {
-    document.querySelectorAll('.drink-sub-content').forEach(el => el.style.display = 'none');
-    document.querySelectorAll('.sub-btn').forEach(b => b.classList.remove('active'));
-
-    const subSec = document.getElementById(subId + '-sub');
-    if (subSec) subSec.style.display = 'block';
-    
-    if (btn) {
-        btn.classList.add('active');
+    const drinksNav = document.getElementById('drinksSubNav');
+    if (categoryName === 'drinks') {
+        drinksNav.style.display = 'flex';
     } else {
-        const defaultBtn = document.querySelector('.sub-btn');
-        if(defaultBtn) defaultBtn.classList.add('active');
+        drinksNav.style.display = 'none';
+    }
+
+    fetch(`api/recipes.php?action=list&category=${categoryName}`)
+        .then(res => res.json())
+        .then(res => {
+            currentLoadedRecipes = res.data;
+            if (categoryName === 'drinks') {
+                const activeBtn = document.querySelector('#drinksSubNav .sub-btn.active') || document.querySelector('#drinksSubNav .sub-btn');
+                filterDrinkSub('freshjuice', activeBtn);
+            } else {
+                renderRecipeCards(res.data);
+            }
+        });
+}
+
+function filterDrinkSub(subType, btnElement) {
+    document.querySelectorAll('#drinksSubNav .sub-btn').forEach(b => b.classList.remove('active'));
+    if (btnElement) btnElement.classList.add('active');
+
+    const filtered = currentLoadedRecipes.filter(r => {
+        if (!r.sub_category) return true;
+        return r.sub_category.toLowerCase() === subType.toLowerCase();
+    });
+    renderRecipeCards(filtered);
+}
+
+function renderRecipeCards(recipes) {
+    const grid = document.getElementById('menu-recipe-grid');
+    if (!recipes || recipes.length === 0) {
+        grid.innerHTML = `<p class="text-muted py-5 text-center">No recipes found in this category.</p>`;
+        return;
+    }
+    grid.innerHTML = recipes.map(r => `
+        <div class="recipe-card" onclick="openDetailPage(${r.id})">
+            <div class="card-img-wrapper">
+                <img src="${r.image_url}" alt="${r.title}">
+            </div>
+            <div class="card-body">
+                <h3>${r.title}</h3>
+                <p>${r.description}</p>
+            </div>
+        </div>
+    `).join('');
+}
+
+function openDetailPage(recipeId) {
+    const r = currentLoadedRecipes.find(x => x.id == recipeId);
+    if (!r) return;
+
+    switchPage('details');
+    document.getElementById('detailsCategoryHeading').innerText = (r.category.charAt(0).toUpperCase() + r.category.slice(1)) + " Recipe Guide";
+    document.getElementById('cardRecipeTitle').innerText = r.title;
+    document.getElementById('cardRecipeDesc').innerText = r.description;
+
+    const ingContainer = document.getElementById('cardRecipeIngredients');
+    if (r.ingredients) {
+        const lines = r.ingredients.split('\n').filter(line => line.trim() !== '');
+        ingContainer.innerHTML = lines.map(item => `<li>${item.trim()}</li>`).join('');
+    } else {
+        ingContainer.innerHTML = `<li>Authentic traditional ingredients</li>`;
     }
 }
 
-// Handle Search (1st Image Issue Fixed Here)
+// Search API Call
 function handleSearch() {
-    const queryInput = document.getElementById('searchInput');
-    const query = queryInput.value.toLowerCase().trim();
-    const errorMsgDiv = document.getElementById('searchErrorMessage');
+    const query = document.getElementById('searchInput').value.trim();
+    if (!query) return alert("Please enter a search term!");
 
-    if (errorMsgDiv) errorMsgDiv.innerText = "";
+    switchPage('menu');
+    document.getElementById('drinksSubNav').style.display = 'none';
+    document.getElementById('category-title').innerText = `Search Results for "${query}"`;
 
-    // 1. හිස්ව Search කළහොත් Message එක පෙන්වීම
-    if (!query) {
-        if (errorMsgDiv) errorMsgDiv.innerText = "Please enter a meal or ingredient name to search!";
-        return;
-    }
+    fetch(`api/recipes.php?action=search&q=${encodeURIComponent(query)}`)
+        .then(res => res.json())
+        .then(res => {
+            currentLoadedRecipes = res.data;
+            renderRecipeCards(res.data);
+        });
+}
 
-    let matches = 0;
-    document.querySelectorAll('#menu-page .recipe-card').forEach(card => {
-        const title = card.getAttribute('data-title') || card.innerText;
-        if (title.toLowerCase().includes(query)) {
-            matches++;
+// Session Check on Load
+window.addEventListener('DOMContentLoaded', () => {
+    fetch('api/auth.php?action=check')
+        .then(r => r.json())
+        .then(data => {
+            const slot = document.getElementById('navAuthSlot');
+            if (data.logged_in) {
+                slot.innerHTML = `
+                    <button class="dp-user-badge-btn" data-bs-toggle="modal" data-bs-target="#dpProfileModal">
+                        <i class='bx bxs-user-circle'></i> ${data.user.full_name.split(' ')[0]}
+                    </button>
+                    <button class="signin-btn ms-2" onclick="handleLogout()">Sign Out</button>
+                `;
+                document.getElementById('profileHeaderName').innerText = data.user.full_name;
+                document.getElementById('profileHeaderEmail').innerText = data.user.email;
+                document.getElementById('editProfileName').value = data.user.full_name;
+                document.getElementById('editProfilePhone').value = data.user.phone || '';
+            }
+        });
+});
+
+function handleLogout() {
+    fetch('api/auth.php?action=logout').then(() => location.reload());
+}
+
+// Auth API Calls
+document.getElementById('dpSignInForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch('api/auth.php?action=login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            email: document.getElementById('loginIdentifier').value.trim(),
+            password: document.getElementById('loginPassword').value
+        })
+    }).then(res => res.json()).then(data => {
+        if (data.status === 'success') location.reload();
+        else alert(data.message);
+    });
+});
+
+document.getElementById('dpRegisterForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch('api/auth.php?action=register', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            full_name: document.getElementById('regFullName').value.trim(),
+            email: document.getElementById('regEmail').value.trim(),
+            phone: document.getElementById('regPhone').value.trim(),
+            password: document.getElementById('regPassword').value
+        })
+    }).then(res => res.json()).then(data => {
+        if (data.status === 'success') location.reload();
+        else alert(data.message);
+    });
+});
+
+document.getElementById('profileUpdateForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch('api/auth.php?action=update_profile', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            full_name: document.getElementById('editProfileName').value.trim(),
+            phone: document.getElementById('editProfilePhone').value.trim()
+        })
+    }).then(res => res.json()).then(data => {
+        if (data.status === 'success') {
+            alert('Profile updated!');
+            location.reload();
         }
     });
+});
 
-    // 2. Match වන එකක් නැත්නම් Error Message එක පෙන්වීම
-    if (matches === 0) {
-        if (errorMsgDiv) errorMsgDiv.innerText = `No recipes found for "${queryInput.value}". Please try another word!`;
-        return;
-    }
-
-    // 3. Match වන එකක් තිබුණොත් 2nd Page එකට මාරු වීම
-    switchPage('menu');
-    
-    // Search කරද්දී Drink Sub-Menu Buttons සම්පූර්ණයෙන්ම සඟවන්න (1st Image issue fix)
-    const subTabBtns = document.querySelector('#drinks .sub-tab-buttons');
-    if (subTabBtns) subTabBtns.style.display = 'none';
-
-    document.querySelectorAll('#menu-page .category-content').forEach(c => c.style.display = 'block');
-    document.querySelectorAll('#menu-page .drink-sub-content').forEach(s => s.style.display = 'block');
-    
-    document.getElementById('category-title').innerText = `Search Results for "${queryInput.value}"`;
-
-    document.querySelectorAll('#menu-page .recipe-card').forEach(card => {
-        const title = card.getAttribute('data-title') || card.innerText;
-        if (title.toLowerCase().includes(query)) {
-            card.style.display = 'block';
-        } else {
-            card.style.display = 'none';
+// Add Recipe API Call
+document.getElementById('createRecipeForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch('api/recipes.php?action=add', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            title: document.getElementById('recipeTitleInput').value.trim(),
+            category: document.getElementById('recipeCategorySelect').value,
+            sub_category: document.getElementById('recipeSubCategorySelect').value,
+            description: document.getElementById('recipeDescInput').value.trim(),
+            ingredients: document.getElementById('recipeIngInput').value.trim()
+        })
+    }).then(res => res.json()).then(data => {
+        if (data.status === 'success') {
+            alert('Recipe published to database!');
+            bootstrap.Modal.getInstance(document.getElementById('addRecipeModal')).hide();
+            document.getElementById('createRecipeForm').reset();
         }
+    });
+});
+
+// Contact API Call
+const contactForm = document.getElementById('dpContactForm');
+if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        fetch('api/contact.php', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: document.getElementById('contactName').value.trim(),
+                email: document.getElementById('contactEmail').value.trim(),
+                message: document.getElementById('contactMessage').value.trim()
+            })
+        }).then(res => res.json()).then(data => {
+            if (data.status === 'success') {
+                alert('Thank you! Your message has been saved.');
+                bootstrap.Modal.getInstance(document.getElementById('contactModal')).hide();
+                contactForm.reset();
+            }
+        });
     });
 }
 
-// Mobile Responsive Menu Toggle
+// Mobile Menu Toggle
 const menuIcon = document.getElementById('menu-icon');
 const navLinks = document.querySelector('.nav-links');
-
 if (menuIcon && navLinks) {
     menuIcon.onclick = () => {
         menuIcon.classList.toggle('bx-x');
         navLinks.classList.toggle('active');
     };
-
-    document.querySelectorAll('.nav-links a, .nav-links button').forEach(item => {
-        item.addEventListener('click', () => {
-            menuIcon.classList.remove('bx-x');
-            navLinks.classList.remove('active');
-        });
-    });
 }
-
-// Modals Validation Setup
-document.addEventListener('DOMContentLoaded', function () {
-    const loginForm = document.getElementById('loginForm');
-    if (loginForm) {
-        loginForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            if (loginForm.checkValidity()) {
-                alert('Sign In Successful!');
-                const modalEl = document.getElementById('signInModal');
-                const modal = bootstrap.Modal.getInstance(modalEl);
-                if (modal) modal.hide();
-                loginForm.reset();
-                loginForm.classList.remove('was-validated');
-            } else {
-                loginForm.classList.add('was-validated');
-            }
-        }, false);
-    }
-
-    const addRecipeForm = document.getElementById('addRecipeForm');
-    if (addRecipeForm) {
-        addRecipeForm.addEventListener('submit', function (event) {
-            event.preventDefault();
-            event.stopPropagation();
-
-            if (addRecipeForm.checkValidity()) {
-                alert('Recipe Submitted Successfully for Review!');
-                const modalEl = document.getElementById('addRecipeModal');
-                const modal = bootstrap.Modal.getInstance(modalEl);
-                if (modal) modal.hide();
-                addRecipeForm.reset();
-                addRecipeForm.classList.remove('was-validated');
-            } else {
-                addRecipeForm.classList.add('was-validated');
-            }
-        }, false);
-    }
-});
