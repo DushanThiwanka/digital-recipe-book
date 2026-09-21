@@ -3,101 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yummy.lk - Interactive Digital Recipe Book</title>
+    <title>Yummy.lk</title>
+    <!-- CDN Styles -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- link css Style  -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-    <div class="dp-announcement-bar text-center py-2 px-3">
+    <!-- ==========================================
+         SECTION 1: TOP ANNOUNCEMENT BAR
+         ========================================== -->
+    <div class="announcement-bar">
         <span class="badge bg-warning text-dark me-2">100% FREE</span>
         <span>Sri Lanka's Premier Digital Culinary Education & Recipe Platform</span>
     </div>
 
+    <!-- ==========================================
+         SECTION 2: STICKY NAVIGATION BAR
+         ========================================== -->
     <nav class="navbar">
-        <a href="#home" class="logo" onclick="switchPage('home')">Yummy.lk</a>
+        <a href="#home" class="logo" onclick="switchPage('home')">
+            <i class='bx bxs-bowl-hot me-1'></i>Yummy.lk
+        </a>
 
         <div class="nav-links">
-            <a href="#home" onclick="switchPage('home')">Home</a>
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#aboutModal">About Us</a>
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#contactModal">Contact Us</a>
-            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addRecipeModal">Add Recipe</a>
+            <a href="#home" onclick="switchPage('home')"><i class='bx bx-home-alt'></i> Home</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('about-us-section')"><i class='bx bx-info-circle'></i> About Us</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('contact-us-section')"><i class='bx bx-phone'></i> Contact Us</a>
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addRecipeModal"><i class='bx bx-plus-circle'></i> Add Recipe</a>
+            <a href="javascript:void(0)" onclick="switchPage('favorites')"><i class='bx bx-heart'></i> Favorites</a>
             <div id="navAuthSlot">
-                <button class="signin-btn" data-bs-toggle="modal" data-bs-target="#dpAuthModal">Sign In</button>
+                <button class="signin-button" data-bs-toggle="modal" data-bs-target="#dpAuthModal">Sign In</button>
             </div>
         </div>
 
         <i class='bx bx-menu' id="menu-icon"></i>
     </nav>
 
-    <div id="home-page" class="page-section animate-fade">
-        <div id="heroCarousel" class="carousel slide carousel-fade hero" data-bs-ride="carousel">
-            <div class="carousel-inner h-100">
-                <div class="carousel-item active h-100">
-                    <div class="hero-content">
-                        <h1>What do you want to cook?</h1>
-                        <p>Discover delicious recipes, share your own, and cook like a pro.</p>
-                    </div>
-                </div>
-                <div class="carousel-item h-100">
-                    <div class="hero-content">
-                        <h1>Fresh Local Ingredients</h1>
-                        <p>Explore authentic Sri Lankan dishes and global flavors.</p>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Search ingredients or meals (e.g. Rice, Hoppers)...">
-                <button type="button" onclick="handleSearch()">Search</button>
-            </div>
-        </div>
+    <!-- ==========================================
+         SECTION 3: HOME PAGE VIEW
+         ========================================== -->
+    <main id="home-page" class="page-section">
 
+        <!-- 3.1: Hero Section (Background Image & Search) -->
+        <main id="home-page" class="page-section">
+             <section class="hero-section">
+            <div class="hero-content">
+      <h1>What do you want to cook?</h1>
+      <p>Discover delicious recipes, share your own, and cook like a pro.</p>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search recipes or ingredients...">
+      <button type="button" onclick="handleSearch()">Search</button>
+    </div>
+     </section>
+        </main>
+        <!-- 3.2: Category Selection Grid -->
         <section class="category-section">
             <div class="category-container">
                 <h2 class="category-title">Choose a meal category</h2>
-                <p class="category-subtitle">Explore specific delicious foods for every time of the day!</p>
+                <p class="category-subtitle">Explore delicious authentic recipes with cook times for every time of day!</p>
                 
                 <div class="category-grid">
                     <div class="category-card" onclick="openMenuPage('breakfast')">
                         <div class="img-wrapper">
-                            <img src="https://i.pinimg.com/736x/c3/89/6d/c3896d054ccc22c7a94b1fb2a4e9649a.jpg" alt="Breakfast">
+                            <img src="image/breakfast.jpg" alt="Breakfast">
                         </div>
                         <h4>Breakfast</h4>
                     </div>
 
                     <div class="category-card" onclick="openMenuPage('lunch')">
                         <div class="img-wrapper">
-                            <img src="https://i.pinimg.com/736x/36/e9/1f/36e91fc843a2abdee12dccc0a97a6a27.jpg" alt="Lunch">
+                            <img src="image/lunch.jpg" alt="Lunch">
                         </div>
                         <h4>Lunch</h4>
                     </div>
 
                     <div class="category-card" onclick="openMenuPage('dinner')">
                         <div class="img-wrapper">
-                            <img src="https://i.pinimg.com/1200x/d6/d0/75/d6d0759eea5d87f87488272a9fa5eb71.jpg" alt="Dinner">
+                            <img src="image/dinner.jpg" alt="Dinner">
                         </div>
                         <h4>Dinner</h4>
                     </div>
 
                     <div class="category-card" onclick="openMenuPage('desserts')">
                         <div class="img-wrapper">
-                            <img src="https://i.pinimg.com/1200x/86/67/e6/8667e6d6df88eca115254236e17e1eaa.jpg" alt="Desserts">
+                            <img src="image/dessert.jpg" alt="Desserts">
                         </div>
                         <h4>Desserts</h4>
                     </div>
 
                     <div class="category-card" onclick="openMenuPage('drinks')">
                         <div class="img-wrapper">
-                            <img src="https://i.pinimg.com/1200x/30/5e/9e/305e9eaf8ef7a7a76abe77ed0dcba92b.jpg" alt="Drinks">
+                            <img src="image/drinks.jpg" alt="Drinks">
                         </div>
                         <h4>Drinks</h4>
                     </div>
 
                     <div class="category-card" onclick="openMenuPage('snacks')">
                         <div class="img-wrapper">
-                            <img src="https://i.pinimg.com/736x/aa/7e/db/aa7edbedbc41e8809e2d5f947707a9c6.jpg" alt="Snacks">
+                            <img src="image/snacks.jpg" alt="Snacks">
                         </div>
                         <h4>Snacks</h4>
                     </div>
@@ -105,7 +113,8 @@
             </div>
         </section>
 
-        <section class="dp-metrics-section py-4">
+        <!-- 3.3: Metrics & Counter Section -->
+        <section class="dp-metrics-section py-5">
             <div class="container">
                 <div class="row text-center g-3">
                     <div class="col-md-3 col-6">
@@ -140,331 +149,234 @@
             </div>
         </section>
 
-        <section class="dp-classes-section py-5 bg-light border-top border-bottom">
-            <div class="container text-center">
-                <span class="badge bg-danger px-3 py-2 fw-semibold mb-2">FREE CULINARY LEARNING</span>
-                <h2 class="category-title">Featured Cooking Masterclasses</h2>
-                <p class="category-subtitle">Guided lessons designed for university beginners, bachelors, and home cooks[cite: 1]</p>
-
-                <div class="row g-4 mt-1 text-start">
-                    <div class="col-md-4">
-                        <div class="dp-course-card bg-white shadow-sm h-100">
-                            <div class="dp-course-thumbnail">
-                                <img src="https://images.unsplash.com/photo-1596040033229-a9821ebd058d?auto=format&fit=crop&w=600&q=80" alt="Sri Lankan Spices" class="w-100">
-                                <span class="badge bg-dark dp-course-badge"><i class='bx bx-time'></i> 25 mins</span>
-                            </div>
-                            <div class="p-3">
-                                <span class="text-danger fw-bold small">FOUNDATION 01</span>
-                                <h5 class="fw-bold mt-1">Authentic Curry Powders & Tempering</h5>
-                                <p class="text-muted small">Learn roasted Jaffna curry powder blends, mustard seed tempering, and coconut gravies.</p>
-                                <hr>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="badge bg-light text-dark border">Beginner</span>
-                                    <button class="btn btn-sm btn-outline-danger fw-bold" onclick="openMenuPage('lunch')">Explore Recipes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="dp-course-card bg-white shadow-sm h-100">
-                            <div class="dp-course-thumbnail">
-                                <img src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=600&q=80" alt="Healthy Bowls" class="w-100">
-                                <span class="badge bg-dark dp-course-badge"><i class='bx bx-time'></i> 20 mins</span>
-                            </div>
-                            <div class="p-3">
-                                <span class="text-success fw-bold small">HEALTH & WELLNESS</span>
-                                <h5 class="fw-bold mt-1">Nutrient-Dense Salads & Sambols</h5>
-                                <p class="text-muted small">Gotukola sambol, fresh avocado bowls, and low-calorie dressings for busy lifestyles.</p>
-                                <hr>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="badge bg-light text-dark border">All Levels</span>
-                                    <button class="btn btn-sm btn-outline-danger fw-bold" onclick="openMenuPage('breakfast')">Explore Recipes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="dp-course-card bg-white shadow-sm h-100">
-                            <div class="dp-course-thumbnail">
-                                <img src="https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=600&q=80" alt="Baking & Sweets" class="w-100">
-                                <span class="badge bg-dark dp-course-badge"><i class='bx bx-time'></i> 35 mins</span>
-                            </div>
-                            <div class="p-3">
-                                <span class="text-primary fw-bold small">DESSERTS & PASTRY</span>
-                                <h5 class="fw-bold mt-1">Traditional Kithul Jaggery Desserts</h5>
-                                <p class="text-muted small">Secrets to silky Watalappan pudding without bubbles, coconut pancakes, and sweets.</p>
-                                <hr>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <span class="badge bg-light text-dark border">Intermediate</span>
-                                    <button class="btn btn-sm btn-outline-danger fw-bold" onclick="openMenuPage('desserts')">Explore Recipes</button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="dp-app-banner py-5 text-white">
+        <!-- 3.4: About Us Section -->
+        <section id="about-us-section" class="py-5 home-scroll-section">
             <div class="container">
-                <div class="row align-items-center">
-                    <div class="col-lg-8 text-lg-start text-center mb-4 mb-lg-0">
-                        <span class="badge bg-warning text-dark px-3 py-2 fw-bold mb-2">JOIN 12,000+ FOOD ENTHUSIASTS</span>
-                        <h2 class="fw-bold mb-2">Have a Secret Family Recipe to Share?</h2>
-                        <p class="mb-0 text-white-50">Create your free account to publish recipes, save favorites, leave reviews, and get community feedback from home cooks across Sri Lanka[cite: 1].</p>
+                <div class="text-center mb-4">
+                    <span class="badge bg-danger px-3 py-2 fw-semibold">WHO WE ARE</span>
+                    <h2 class="category-title mt-2">About Yummy.lk</h2>
+                    <p class="category-subtitle">Empowering Sri Lankan Home Cooks through Interactive Digital Recipes</p>
+                </div>
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="about-card p-4 rounded shadow-sm bg-white border">
+                            <h4 class="fw-bold mb-3" style="color: var(--main-color);"><i class='bx bx-target-lock me-2'></i>Our Vision & Mission</h4>
+                            <p class="text-muted">Yummy.lk is dedicated to preserving traditional Sri Lankan culinary culture while adapting it for busy learners, students, and home cooks worldwide. Our platform offers exact prep times, step-by-step directions, and authentic ingredient lists for every dish.</p>
+                            <div class="p-3 bg-light rounded mt-3 border">
+                                <div class="d-flex align-items-center">
+                                    <i class='bx bxs-institution text-danger me-3 fs-1'></i>
+                                    <div>
+                                        <p class="mb-0 fw-bold small text-dark">ICT 1209: Web Technologies Mini Project Phase 1</p>
+                                        <p class="mb-0 text-muted" style="font-size: 13px;">Department of ICT, Faculty of Technology, Rajarata University of Sri Lanka.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="col-lg-4 text-lg-end text-center">
-                        <button class="btn btn-light btn-lg px-4 py-2 fw-bold text-danger shadow" data-bs-toggle="modal" data-bs-target="#dpAuthModal">
-                            <i class='bx bx-user-plus'></i> Register as a Contributor
-                        </button>
+                    <div class="col-lg-6">
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <div class="dp-info-tile p-4 text-center h-100 bg-white border rounded shadow-sm">
+                                    <i class='bx bx-time-five fs-1 text-danger mb-2'></i>
+                                    <h6 class="fw-bold">Accurate Cook Times</h6>
+                                    <p class="text-muted small mb-0">Every recipe includes prep and cook times so you can plan meals effectively.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="dp-info-tile p-4 text-center h-100 bg-white border rounded shadow-sm">
+                                    <i class='bx bx-list-check fs-1 text-success mb-2'></i>
+                                    <h6 class="fw-bold">Clear Step-by-Step</h6>
+                                    <p class="text-muted small mb-0">Detailed numbered instructions simplify even complex traditional gravies.</p>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </section>
-    </div>
 
-    <div id="menu-page" class="page-section animate-fade" style="display: none;">
+        <!-- 3.5: Contact Us Section -->
+        <section id="contact-us-section" class="py-5 bg-white border-top home-scroll-section">
+            <div class="container">
+                <div class="text-center mb-4">
+                    <span class="badge bg-danger px-3 py-2 fw-semibold">GET IN TOUCH</span>
+                    <h2 class="category-title mt-2">Contact Us</h2>
+                    <p class="category-subtitle">Have recipe inquiries, culinary suggestions, or technical feedback? We'd love to hear from you!</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-5">
+                        <div class="dp-contact-info-panel h-100 p-4 rounded shadow-sm border bg-light">
+                            <h5 class="fw-bold mb-3" style="color: var(--main-color);"><i class='bx bx-map-pin me-2'></i>Campus Hub</h5>
+                            <p class="text-muted mb-2">Faculty of Technology, Rajarata University of Sri Lanka, Mihintale.</p>
+                            <hr>
+                            <p class="text-muted mb-2"><i class='bx bx-phone me-2 text-danger'></i><strong>Helpline:</strong> 074 292 1957 </p>
+                            <p class="text-muted mb-0"><i class='bx bx-envelope me-2 text-danger'></i><strong>Email:</strong> hello@yummy.lk</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <form id="dpHomeContactForm" class="p-4 border rounded shadow-sm bg-light">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Your Name</label>
+                                    <input type="text" id="homeContactName" class="form-control" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Your Email</label>
+                                    <input type="email" id="homeContactEmail" class="form-control" >
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small fw-semibold">Your Message</label>
+                                    <textarea id="homeContactMessage" class="form-control" rows="4" ></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn dp-btn-primary w-100 py-2 fw-semibold">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================
+         SECTION 4: MENU LISTING PAGE VIEW
+         ========================================== -->
+    <main id="menu-page" class="page-section" style="display: none;">
         <section class="menu-section">
             <div class="menu-container">
                 <h1 id="category-title" class="menu-title">Category Menu</h1>
                 <p class="menu-subtitle">Explore specific delicious foods for every time of the day!</p>
 
+                <!-- Search/Filter Input -->
+                <div class="menu-toolbar">
+                    <input type="text" id="menuFilterInput" placeholder="Filter these results by name or ingredient..." oninput="filterMenuRecipes(this.value)">
+                </div>
+
+                <!-- Drink Category Sub-tabs -->
                 <div id="drinksSubNav" class="sub-tab-buttons" style="display: none;">
-                    <button class="sub-btn" onclick="filterDrinkSub('smoothies', this)">Smoothies</button>
+                    <button class="sub-btn active" onclick="filterDrinkSub('smoothies', this)">Smoothies</button>
                     <button class="sub-btn" onclick="filterDrinkSub('mojito', this)">Mojito</button>
-                    <button class="sub-btn active" onclick="filterDrinkSub('freshjuice', this)">Fresh Juice</button>
+                    <button class="sub-btn" onclick="filterDrinkSub('freshjuice', this)">Fresh Juice</button>
                 </div>
 
-                <div class="content-area">
-                    <div id="breakfast" class="category-content">
-                        <div class="recipe-grid">
-                            <div class="recipe-card" data-title="Sri Lankan Milk Rice Kiribath" onclick="openDetailPage('breakfast')">
-                                <div class="card-img-wrapper">
-                                    <img src="https://i.pinimg.com/736x/8e/f7/2f/8ef72f77d2aa4db8daa990efadc3d253.jpg" alt="Milk Rice">
-                                </div>
-                                <div class="card-body">
-                                    <h3>Sri Lankan Milk Rice (Kiribath)</h3>
-                                    <p>Traditional rice cooked with coconut milk, served with Lunu Miris.</p>
-                                </div>
-                            </div>
-                            <div class="recipe-card" data-title="Egg Hoppers" onclick="openDetailPage('breakfast')">
-                                <div class="card-img-wrapper">
-                                    <img src="https://i.pinimg.com/1200x/d9/93/34/d99334d807cd20387bd4d8c7ade15c8c.jpg" alt="Egg Hoppers">
-                                </div>
-                                <div class="card-body">
-                                    <h3>Egg Hoppers</h3>
-                                    <p>Crispy rice flour pancakes with a soft cooked egg center.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="lunch" class="category-content">
-                        <div class="recipe-grid">
-                            <div class="recipe-card" data-title="Traditional Rice Curry Platter" onclick="openDetailPage('lunch')">
-                                <div class="card-img-wrapper">
-                                    <img src="https://i.pinimg.com/736x/d9/96/6b/d9966b3959a0d9fa1d1401bb84b53700.jpg" alt="Rice and Curry">
-                                </div>
-                                <div class="card-body">
-                                    <h3>Traditional Rice & Curry Platter</h3>
-                                    <p>White rice served with spicy chicken curry, dhal, and sambol.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="dinner" class="category-content">
-                        <div class="recipe-grid">
-                            <div class="recipe-card" data-title="Chicken Kothu Rotti" onclick="openDetailPage('dinner')">
-                                <div class="card-img-wrapper">
-                                    <img src="https://i.pinimg.com/1200x/d6/d0/75/d6d0759eea5d87f87488272a9fa5eb71.jpg" alt="Kothu Rotti">
-                                </div>
-                                <div class="card-body">
-                                    <h3>Chicken Kothu Rotti</h3>
-                                    <p>Shredded flatbread chopped on a hot griddle with chicken & veggies.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="desserts" class="category-content">
-                        <div class="recipe-grid">
-                            <div class="recipe-card" data-title="Sri Lankan Watalappan" onclick="openDetailPage('desserts')">
-                                <div class="card-img-wrapper">
-                                    <img src="https://i.pinimg.com/1200x/86/67/e6/8667e6d6df88eca115254236e17e1eaa.jpg" alt="Desserts">
-                                </div>
-                                <div class="card-body">
-                                    <h3>Sri Lankan Watalappan</h3>
-                                    <p>Rich custard dessert made with kithul jaggery and coconut milk.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="drinks" class="category-content">
-                        <div id="smoothies-sub" class="drink-sub-content" style="display: none;">
-                            <div class="recipe-grid">
-                                <div class="recipe-card" data-title="Blueberry Protein Smoothie" onclick="openDetailPage('drinks')">
-                                    <div class="card-img-wrapper">
-                                        <img src="https://images.unsplash.com/photo-1553530666-ba11a7da3888?auto=format&fit=crop&w=600&q=80" alt="Smoothie">
-                                    </div>
-                                    <div class="card-body">
-                                        <h3>Blueberry Protein Smoothie</h3>
-                                        <p>Blended with protein, yogurt and forest blueberries.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="mojito-sub" class="drink-sub-content" style="display: none;">
-                            <div class="recipe-grid">
-                                <div class="recipe-card" data-title="Classic Mint Lime Mojito" onclick="openDetailPage('drinks')">
-                                    <div class="card-img-wrapper">
-                                        <img src="https://images.unsplash.com/photo-1536935338788-846bb9981813?auto=format&fit=crop&w=600&q=80" alt="Mojito">
-                                    </div>
-                                    <div class="card-body">
-                                        <h3>Classic Mint Lime Mojito</h3>
-                                        <p>A fizzy, cool and refreshing soda beverage infused with fresh garden mint leaves.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div id="freshjuice-sub" class="drink-sub-content">
-                            <div class="recipe-grid">
-                                <div class="recipe-card" data-title="Fresh Strawberry Juice" onclick="openDetailPage('drinks')">
-                                    <div class="card-img-wrapper">
-                                        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=600&q=80" alt="Juice">
-                                    </div>
-                                    <div class="card-body">
-                                        <h3>Fresh Strawberry Juice</h3>
-                                        <p>Handpicked organic strawberries blended smoothly with lime juice and ice.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div id="snacks" class="category-content">
-                        <div class="recipe-grid">
-                            <div class="recipe-card" data-title="Spicy Dhal Vade" onclick="openDetailPage('snacks')">
-                                <div class="card-img-wrapper">
-                                    <img src="https://i.pinimg.com/1200x/d8/8c/f0/d88cf02ee4547838432e8d601aa462b1.jpg" alt="Snacks">
-                                </div>
-                                <div class="card-body">
-                                    <h3>Spicy Dhal Vade</h3>
-                                    <p>Crunchy tea-time snack made of split chickpeas and curry leaves.</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <!-- Recipe Cards Grid -->
+                <div id="menu-recipe-grid" class="recipe-grid"></div>
 
                 <div class="back-home-wrapper">
                     <a href="javascript:void(0)" class="back-home-btn" onclick="goBack()">‹ Back</a>
                 </div>
             </div>
         </section>
-    </div>
+    </main>
 
-    <div id="details-page" class="page-section animate-fade" style="display: none;">
+    <!-- ==========================================
+         SECTION 5: FAVORITES PAGE VIEW
+         ========================================== -->
+    <main id="favorites-page" class="page-section" style="display: none;">
+        <section class="menu-section">
+            <div class="menu-container">
+                <h1 class="menu-title">My Favorites</h1>
+                <p class="menu-subtitle">Recipes you've saved for later &mdash; click the heart on any recipe to save it here.</p>
+
+                <div id="favorites-recipe-grid" class="recipe-grid"></div>
+
+                <div class="back-home-wrapper">
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="goBack()">‹ Back</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================
+         SECTION 6: RECIPE DETAILS PAGE VIEW
+         ========================================== -->
+    <main id="details-page" class="page-section" style="display: none;">
         <section class="details-section">
             <div class="details-container">
-                <h1 id="recipe-main-title" class="details-title">Recipe Details</h1>
-                <p class="details-subtitle">Step-by-step guides and delicious configurations for your meal!</p>
+                <p class="details-eyebrow" id="detailsCategoryHeading">Category</p>
+                <h1 id="cardRecipeTitle" class="details-title">Recipe Title</h1>
+                <p class="details-subtitle" id="cardRecipeDesc">Recipe description.</p>
 
-                <div class="details-content-area">
-                    <div id="drinks-recipes" class="category-detail-group" style="display: none;">
-                        <div class="recipe-detail-card no-img-card">
-                            <div class="card-info">
-                                <h2>Fresh Strawberry Juice</h2>
-                                <p class="desc">Handpicked organic strawberries blended smoothly with lime juice and ice.</p>
-                                <h4>Ingredients:</h4>
-                                <ul>
-                                    <li>Fresh Strawberries</li>
-                                    <li>Lime Juice</li>
-                                    <li>Crushed Ice & Sugar</li>
-                                </ul>
-                            </div>
+                <div class="details-hero-img">
+                    <img id="detailsRecipeImage" src="" alt="Recipe photo">
+                </div>
+
+                <!-- Cook Time Indicators -->
+                <div class="recipe-meta-cards">
+                    <div class="meta-item">
+                        <i class='bx bx-time-five'></i>
+                        <div>
+                            <span class="meta-label">Prep Time</span>
+                            <strong id="cardPrepTime">15 mins</strong>
                         </div>
                     </div>
-
-                    <div id="breakfast-recipes" class="category-detail-group" style="display: none;">
-                        <div class="recipe-detail-card no-img-card">
-                            <div class="card-info">
-                                <h2>Sri Lankan Milk Rice (Kiribath)</h2>
-                                <p class="desc">Traditional coconut milk rice cooked during special celebrations and traditional tomorrows.</p>
-                                <h4>Ingredients:</h4>
-                                <ul>
-                                    <li>2 cups White Raw Rice</li>
-                                    <li>2 cups Thick Coconut Milk</li>
-                                    <li>Salt to taste</li>
-                                </ul>
-                            </div>
+                    <div class="meta-item">
+                        <i class='bx bx-stopwatch'></i>
+                        <div>
+                            <span class="meta-label">Cook Time</span>
+                            <strong id="cardCookTime">25 mins</strong>
                         </div>
                     </div>
-
-                    <div id="lunch-recipes" class="category-detail-group" style="display: none;">
-                        <div class="recipe-detail-card no-img-card">
-                            <div class="card-info">
-                                <h2>Traditional Rice & Chicken Curry Platter</h2>
-                                <p class="desc">A grand meal platter featuring hot rice, rich chicken curry, dhal curry, and fresh sambol.</p>
-                                <h4>Ingredients:</h4>
-                                <ul>
-                                    <li>Steamed Samba Rice</li>
-                                    <li>Spicy Roasted Chicken Gravy</li>
-                                    <li>Coconut Dhal Curry & Gotukola Sambol</li>
-                                </ul>
-                            </div>
+                    <div class="meta-item">
+                        <i class='bx bx-user'></i>
+                        <div>
+                            <span class="meta-label">Servings</span>
+                            <strong id="cardServings">4 Persons</strong>
                         </div>
                     </div>
-
-                    <div id="dinner-recipes" class="category-detail-group" style="display: none;">
-                        <div class="recipe-detail-card no-img-card">
-                            <div class="card-info">
-                                <h2>Chicken Kothu Rotti</h2>
-                                <p class="desc">Popular street food prepared by chopping flatbread with eggs, veggies, chicken curry, and spices.</p>
-                                <h4>Ingredients:</h4>
-                                <ul>
-                                    <li>3 Shredded Parothas</li>
-                                    <li>2 Eggs & Chicken Curry Pieces</li>
-                                    <li>Chopped Onions, Leeks & Cabbage</li>
-                                </ul>
-                            </div>
+                    <div class="meta-item">
+                        <i class='bx bx-dish'></i>
+                        <div>
+                            <span class="meta-label">Difficulty</span>
+                            <strong id="cardDifficulty">Easy</strong>
                         </div>
                     </div>
+                </div>
 
-                    <div id="desserts-recipes" class="category-detail-group" style="display: none;">
-                        <div class="recipe-detail-card no-img-card">
-                            <div class="card-info">
-                                <h2>Sri Lankan Watalappan</h2>
-                                <p class="desc">A steamed jaggery and coconut milk pudding spiced with nutmeg, cardamom, and cashews.</p>
-                                <h4>Ingredients:</h4>
-                                <ul>
-                                    <li>250g Dark Kithul Jaggery</li>
-                                    <li>5 Whole Eggs</li>
-                                    <li>1 cup Thick Coconut Milk & Cashews</li>
-                                </ul>
-                            </div>
-                        </div>
+                <div class="details-meta-row">
+                    <button id="detailsFavBtn" class="fav-btn" onclick="toggleFavoriteCurrent()">
+                        <i class='bx bx-heart'></i> Save Recipe
+                    </button>
+                    <div class="rating-summary" id="detailsAvgRating"></div>
+                </div>
+
+                <!-- Ingredients & Steps Side-by-Side -->
+                <div class="details-body-grid">
+                    <div class="ingredients-panel">
+                        <h4>Ingredients</h4>
+                        <ul id="cardRecipeIngredients"></ul>
                     </div>
 
-                    <div id="snacks-recipes" class="category-detail-group" style="display: none;">
-                        <div class="recipe-detail-card no-img-card">
-                            <div class="card-info">
-                                <h2>Spicy Dhal Vade (Parippu Vade)</h2>
-                                <p class="desc">Deep-fried crisp tea-time snack made with coarsely ground chana dhal, chili, and fresh curry leaves.</p>
-                                <h4>Ingredients:</h4>
-                                <ul>
-                                    <li>2 cups Chana Dhal (soaked)</li>
-                                    <li>Dried Red Chilies & Green Chilies</li>
-                                    <li>Finely chopped Onions & Curry Leaves</li>
-                                </ul>
-                            </div>
-                        </div>
+                    <div class="instructions-panel">
+                        <h4>Step-by-Step Cooking Method</h4>
+                        <div id="cardRecipeSteps" class="steps-timeline"></div>
                     </div>
+                </div>
+
+                <!-- Community Reviews -->
+                <div class="comments-panel mt-4">
+                    <h4>Community Feedback (<span id="commentCount">0</span>)</h4>
+                    <div id="commentsList" class="comments-list"></div>
+
+                    <form id="addCommentForm" class="comment-form mt-3">
+                        <div class="mb-2">
+                            <label class="form-label small fw-semibold">Your Name</label>
+                            <input type="text" id="commentName" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label small fw-semibold d-block">Your Rating</label>
+                            <div id="starPicker" class="star-picker"></div>
+                            <input type="hidden" id="commentRatingValue" value="5">
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label small fw-semibold">Your Feedback</label>
+                            <textarea id="commentText" class="form-control form-control-sm" rows="3" placeholder="Share tips, tweaks, or how it turned out..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn dp-btn-primary w-100 py-2 fw-semibold">Post Feedback</button>
+                    </form>
                 </div>
 
                 <div class="back-home-wrapper">
@@ -472,8 +384,51 @@
                 </div>
             </div>
         </section>
-    </div>
+    </main>
 
+    <!-- ==========================================
+         SECTION 7: SITE FOOTER
+         ========================================== -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col brand-col">
+                    <h2 class="footer-logo">Yummy.lk</h2>
+                    <p class="info-label"><strong>Campus Location:</strong></p>
+                    <p class="info-text">Faculty of Technology, Rajarata University of Sri Lanka, Mihintale.</p>
+                    <p class="info-label"><strong>Helpline & Inquiries:</strong></p>
+                    <p class="info-text">074 292 1954 | hello@yummy.lk</p>
+                </div>
+
+                <div class="footer-col links-col">
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="switchPage('home')">Home Page</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSection('about-us-section')">About Us</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSection('contact-us-section')">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col links-col">
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('breakfast')">Breakfast Menu</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('lunch')">Lunch Menu</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('dinner')">Dinner Menu</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('desserts')">Desserts</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Yummy.lk. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         SECTION 8: MODALS (POP-UPS)
+         ========================================== -->
+
+    <!-- 8.1: Auth Modal (Sign In / Register) -->
     <div class="modal fade" id="dpAuthModal" tabindex="-1">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content dp-auth-card">
@@ -501,11 +456,11 @@
                             <form id="dpSignInForm">
                                 <div class="mb-3 text-start">
                                     <label class="form-label small fw-semibold">Email or Mobile Number</label>
-                                    <input type="text" id="loginIdentifier" class="form-control" placeholder="07XXXXXXXX or email" required>
+                                    <input type="text" id="loginIdentifier" class="form-control"  required>
                                 </div>
                                 <div class="mb-3 text-start">
                                     <label class="form-label small fw-semibold">Password</label>
-                                    <input type="password" id="loginPassword" class="form-control" placeholder="••••••••" required>
+                                    <input type="password" id="loginPassword" class="form-control"  required>
                                 </div>
                                 <button type="submit" class="btn dp-btn-primary w-100 py-2 fw-semibold">Sign In</button>
                             </form>
@@ -514,19 +469,19 @@
                             <form id="dpRegisterForm">
                                 <div class="mb-2 text-start">
                                     <label class="form-label small fw-semibold">Full Name</label>
-                                    <input type="text" id="regFullName" class="form-control" placeholder="Kamal Perera" required>
+                                    <input type="text" id="regFullName" class="form-control"  required>
                                 </div>
                                 <div class="mb-2 text-start">
                                     <label class="form-label small fw-semibold">Email</label>
-                                    <input type="email" id="regEmail" class="form-control" placeholder="name@example.com" required>
+                                    <input type="email" id="regEmail" class="form-control"  required>
                                 </div>
                                 <div class="mb-2 text-start">
                                     <label class="form-label small fw-semibold">Mobile Phone</label>
-                                    <input type="tel" id="regPhone" class="form-control" placeholder="07XXXXXXXX" required>
+                                    <input type="tel" id="regPhone" class="form-control"  required>
                                 </div>
                                 <div class="mb-3 text-start">
                                     <label class="form-label small fw-semibold">Password</label>
-                                    <input type="password" id="regPassword" class="form-control" placeholder="Min 6 characters" minlength="6" required>
+                                    <input type="password" id="regPassword" class="form-control"  required>
                                 </div>
                                 <button type="submit" class="btn dp-btn-primary w-100 py-2 fw-semibold">Create Account</button>
                             </form>
@@ -537,124 +492,9 @@
         </div>
     </div>
 
-    <div class="modal fade" id="dpProfileModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content dp-auth-card">
-                <div class="modal-header border-0 pb-0">
-                    <h5 class="modal-title fw-bold" style="color: var(--main-color);">Member Profile</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4 text-center">
-                    <img src="https://cdn-icons-png.flaticon.com/512/3135/3135715.png" class="dp-profile-avatar mb-2" alt="Avatar">
-                    <h5 id="profileHeaderName" class="fw-bold mb-0">User</h5>
-                    <p id="profileHeaderEmail" class="text-muted small mb-4">user@mail.com</p>
-
-                    <form id="profileUpdateForm" class="text-start border-top pt-3">
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Full Name</label>
-                            <input type="text" id="editProfileName" class="form-control" required>
-                        </div>
-                        <div class="mb-3">
-                            <label class="form-label small fw-semibold">Mobile Phone</label>
-                            <input type="tel" id="editProfilePhone" class="form-control">
-                        </div>
-                        <button type="submit" class="btn dp-btn-primary w-100 py-2">Update Profile</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="aboutModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content dp-auth-card">
-                <div class="modal-header border-0 pb-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4 pt-1">
-                    <div class="text-center mb-4">
-                        <div class="dp-logo-circle mb-2 mx-auto"><i class='bx bxs-graduation'></i></div>
-                        <h3 class="fw-bold" style="color: var(--main-color);">About Yummy.lk Community</h3>
-                        <p class="text-muted small">Empowering Sri Lankan Home Cooks through Free Digital Culinary Education</p>
-                    </div>
-
-                    <div class="row g-3 mb-4">
-                        <div class="col-md-6">
-                            <div class="dp-info-tile p-3 h-100">
-                                <h5 class="fw-bold text-dark"><i class='bx bx-target-lock text-danger me-2'></i>Our Vision</h5>
-                                <p class="text-muted small mb-0">Democratizing culinary knowledge and providing free, high quality step-by-step guides for everyone across Sri Lanka[cite: 1].</p>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="dp-info-tile p-3 h-100">
-                                <h5 class="fw-bold text-dark"><i class='bx bx-bulb text-warning me-2'></i>Our Mission</h5>
-                                <p class="text-muted small mb-0">Building an open, interactive digital ecosystem that connects traditional cooks with beginner learners and students[cite: 1].</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="p-3 bg-light rounded text-start">
-                        <div class="d-flex align-items-center">
-                            <i class='bx bxs-institution text-muted me-3' style="font-size: 32px;"></i>
-                            <div>
-                                <p class="mb-0 fw-bold small text-dark">ICT 1209: Web Technologies Mini Project Phase 1[cite: 1]</p>
-                                <p class="mb-0 text-muted" style="font-size: 12px;">Department of ICT, Faculty of Technology, Rajarata University of Sri Lanka.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="modal fade" id="contactModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered modal-lg">
-            <div class="modal-content dp-auth-card">
-                <div class="modal-header border-0 pb-0">
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body p-4 pt-1">
-                    <div class="text-center mb-4">
-                        <div class="dp-logo-circle mb-2 mx-auto"><i class='bx bx-support'></i></div>
-                        <h3 class="fw-bold" style="color: var(--main-color);">Get in Touch with Us</h3>
-                        <p class="text-muted small">Have culinary questions, partnership inquiries, or technical feedback? We are here to help!</p>
-                    </div>
-
-                    <div class="row g-4">
-                        <div class="col-lg-5">
-                            <div class="dp-contact-info-panel h-100 p-3 rounded">
-                                <h5 class="fw-bold mb-3" style="color: var(--main-color);">Contact Information</h5>
-                                <p class="small text-muted mb-2"><strong>Campus Hub:</strong> Faculty of Technology, Rajarata University of Sri Lanka, Mihintale.</p>
-                                <p class="small text-muted mb-2"><strong>Helpline:</strong> 074 292 1954 / 025 226 6200</p>
-                                <p class="small text-muted mb-3"><strong>Official Email:</strong> hello@yummy.lk</p>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-7">
-                            <form id="dpContactForm" class="p-3 border rounded">
-                                <div class="mb-2 text-start">
-                                    <label class="form-label small fw-semibold">Your Name</label>
-                                    <input type="text" id="contactName" class="form-control form-control-sm" required>
-                                </div>
-                                <div class="mb-2 text-start">
-                                    <label class="form-label small fw-semibold">Email</label>
-                                    <input type="email" id="contactEmail" class="form-control form-control-sm" required>
-                                </div>
-                                <div class="mb-3 text-start">
-                                    <label class="form-label small fw-semibold">Your Message</label>
-                                    <textarea id="contactMessage" class="form-control form-control-sm" rows="3" required></textarea>
-                                </div>
-                                <button type="submit" class="btn dp-btn-primary w-100 py-2 fw-semibold">Submit Message</button>
-                            </form>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- 8.2: Add Recipe Modal -->
     <div class="modal fade" id="addRecipeModal" tabindex="-1">
-        <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
             <div class="modal-content">
                 <div class="modal-header border-0 pb-0">
                     <h5 class="modal-title fw-bold">Add New Recipe</h5>
@@ -662,68 +502,84 @@
                 </div>
                 <div class="modal-body p-4">
                     <form id="addRecipeForm" novalidate>
-                        <div class="mb-3 text-start">
-                            <label class="form-label fw-semibold">Recipe Title</label>
-                            <input type="text" class="form-control" id="recipeTitleInput" placeholder="e.g. Pol Rotti" required>
+                        <div class="row g-2">
+                            <div class="col-md-8 text-start mb-2">
+                                <label class="form-label fw-semibold">Recipe Title</label>
+                                <input type="text" class="form-control" id="recipeTitleInput" placeholder="e.g. Pol Rotti" required>
+                            </div>
+                            <div class="col-md-4 text-start mb-2">
+                                <label class="form-label fw-semibold">Category</label>
+                                <select class="form-select" id="recipeCategoryInput" onchange="toggleSubCategoryField()" required>
+                                    <option value="" selected disabled>Choose category...</option>
+                                    <option value="breakfast">Breakfast</option>
+                                    <option value="lunch">Lunch</option>
+                                    <option value="dinner">Dinner</option>
+                                    <option value="desserts">Desserts</option>
+                                    <option value="drinks">Drinks</option>
+                                    <option value="snacks">Snacks</option>
+                                </select>
+                            </div>
                         </div>
-                        <div class="mb-3 text-start">
-                            <label class="form-label fw-semibold">Category</label>
-                            <select class="form-select" id="recipeCategoryInput" required>
-                                <option value="" selected disabled>Choose category...</option>
-                                <option value="breakfast">Breakfast</option>
-                                <option value="lunch">Lunch</option>
-                                <option value="dinner">Dinner</option>
-                                <option value="desserts">Desserts</option>
-                                <option value="drinks">Drinks</option>
-                                <option value="snacks">Snacks</option>
+
+                        <div class="row g-2 mb-2">
+                            <div class="col-md-3 text-start">
+                                <label class="form-label small fw-semibold">Prep Time</label>
+                                <input type="text" class="form-control" id="recipePrepTimeInput" placeholder="e.g. 15 mins" required>
+                            </div>
+                            <div class="col-md-3 text-start">
+                                <label class="form-label small fw-semibold">Cook Time</label>
+                                <input type="text" class="form-control" id="recipeCookTimeInput" placeholder="e.g. 20 mins" required>
+                            </div>
+                            <div class="col-md-3 text-start">
+                                <label class="form-label small fw-semibold">Servings</label>
+                                <input type="text" class="form-control" id="recipeServingsInput" placeholder="e.g. 4 Persons" required>
+                            </div>
+                            <div class="col-md-3 text-start">
+                                <label class="form-label small fw-semibold">Difficulty</label>
+                                <select class="form-select" id="recipeDifficultyInput">
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col text-start mb-2" id="subCategoryWrapper" style="display: none;">
+                            <label class="form-label fw-semibold">Drink Type</label>
+                            <select class="form-select" id="recipeSubCategoryInput">
+                                <option value="smoothies">Smoothies</option>
+                                <option value="mojito">Mojito</option>
+                                <option value="freshjuice">Fresh Juice</option>
                             </select>
                         </div>
-                        <div class="mb-3 text-start">
-                            <label class="form-label fw-semibold">Ingredients & Method</label>
-                            <textarea class="form-control" id="recipeDescInput" rows="3" placeholder="List ingredients..." required></textarea>
+
+                        <div class="mb-2 text-start">
+                            <label class="form-label fw-semibold">Short Description</label>
+                            <textarea class="form-control" id="recipeDescInput" rows="2" placeholder="Brief summary of this dish..." required></textarea>
                         </div>
-                        <button type="submit" class="btn text-white w-100 fw-bold py-2 mt-2" style="background-color: var(--main-color);">Submit Recipe</button>
+
+                        <div class="mb-2 text-start">
+                            <label class="form-label fw-semibold">Ingredients (one per line)</label>
+                            <textarea class="form-control" id="recipeIngredientsInput" rows="3" placeholder="2 cups Wheat Flour&#10;1 cup Grated Coconut&#10;Salt to taste" required></textarea>
+                        </div>
+
+                        <div class="mb-2 text-start">
+                            <label class="form-label fw-semibold">Cooking Instructions (one step per line)</label>
+                            <textarea class="form-control" id="recipeInstructionsInput" rows="4" placeholder="Mix flour and coconut in a bowl.&#10;Add warm water slowly to knead into dough.&#10;Shape into flat rounds and roast on a hot griddle." required></textarea>
+                        </div>
+
+                        <div class="mb-3 text-start">
+                            <label class="form-label fw-semibold">Recipe Photo <span class="text-muted fw-normal">(optional)</span></label>
+                            <input type="file" class="form-control" id="recipeImageInput" accept="image/*">
+                        </div>
+                        <button type="submit" class="btn text-white w-100 fw-bold py-2 mt-2" style="background-color: var(--main-color);">Publish Recipe</button>
                     </form>
                 </div>
             </div>
         </div>
     </div>
 
-    <footer class="site-footer">
-        <div class="footer-container">
-            <div class="footer-row">
-                <div class="footer-col brand-col">
-                    <h2 class="footer-logo">Yummy.lk</h2>
-                    <p class="info-label"><strong>Address:</strong></p>
-                    <p class="info-text">Rajarata University, Mihintale, Sri Lanka.</p>
-                    <p class="info-label"><strong>Contact:</strong></p>
-                    <p class="info-text">0742921954 | hello@yummy.lk</p>
-                </div>
-
-                <div class="footer-col links-col">
-                    <ul class="footer-links">
-                        <li><a href="javascript:void(0)" onclick="switchPage('home')">Home Page</a></li>
-                        <li><a href="javascript:void(0)" onclick="openMenuPage('breakfast')">Breakfast</a></li>
-                        <li><a href="javascript:void(0)" onclick="openMenuPage('lunch')">Lunch</a></li>
-                        <li><a href="javascript:void(0)" onclick="openMenuPage('dinner')">Dinner</a></li>
-                    </ul>
-                </div>
-
-                <div class="footer-col links-col">
-                    <ul class="footer-links">
-                        <li><a href="javascript:void(0)" onclick="openMenuPage('desserts')">Desserts</a></li>
-                        <li><a href="javascript:void(0)" onclick="openMenuPage('drinks')">Drinks</a></li>
-                        <li><a href="javascript:void(0)" onclick="openMenuPage('snacks')">Snacks</a></li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="footer-bottom">
-                <p>&copy; 2026 Yummy.lk. All rights reserved.</p>
-            </div>
-        </div>
-    </footer>
-
+    <!-- Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="script.js"></script>
 </body>
