@@ -1,0 +1,600 @@
+
+
+
+<?php session_start(); ?>
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yummy.lk</title>
+    <!-- CDN Styles -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <!-- link css Style  -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <!-- ==========================================
+         SECTION 1: TOP ANNOUNCEMENT BAR
+         ========================================== -->
+    <div class="announcement-bar">
+        <span class="badge bg-warning text-dark me-2">100% FREE</span>
+        <span>Sri Lanka's Premier Digital Culinary Education & Recipe Platform</span>
+    </div>
+
+    <!-- ==========================================
+         SECTION 2: STICKY NAVIGATION BAR
+         ========================================== -->
+    <nav class="navbar">
+        <a href="#home" class="logo" onclick="switchPage('home')">
+            <i class='bx bxs-bowl-hot me-1'></i>Yummy.lk
+        </a>
+
+        <div class="nav-links">
+            <a href="#home" onclick="switchPage('home')"><i class='bx bx-home-alt'></i> Home</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('about-us-section')"><i class='bx bx-info-circle'></i> About Us</a>
+            <a href="javascript:void(0)" onclick="scrollToSection('contact-us-section')"><i class='bx bx-phone'></i> Contact Us</a>
+            <a href="javascript:void(0)" data-bs-toggle="modal" data-bs-target="#addRecipeModal"><i class='bx bx-plus-circle'></i> Add Recipe</a>
+            <a href="javascript:void(0)" onclick="switchPage('favorites')"><i class='bx bx-heart'></i> Favorites</a>
+            <div id="navAuthSlot">
+    <?php if (isset($_SESSION['user_id'])): ?>
+        <a href="dashboard.php" class="btn btn-outline-danger me-2">Dashboard</a>
+        <a href="auth/logout.php" class="btn btn-danger">Logout</a>
+    <?php else: ?>
+        <a href="auth/login.php" class="signin-button text-white">Sign In</a>
+    <?php endif; ?>
+</div>
+        </div>
+
+        <i class='bx bx-menu' id="menu-icon"></i>
+    </nav>
+
+    <!-- ==========================================
+         SECTION 3: HOME PAGE VIEW
+         ========================================== -->
+    <main id="home-page" class="page-section">
+
+        <!-- 3.1: Hero Section (Background Image & Search) -->
+        <main id="home-page" class="page-section">
+             <section class="hero-section">
+            <div class="hero-content">
+      <h1>What do you want to cook?</h1>
+      <p>Discover delicious recipes, share your own, and cook like a pro.</p>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" placeholder="Search recipes or ingredients...">
+      <button type="button" onclick="handleSearch()">Search</button>
+    </div>
+     </section>
+        </main>
+        <!-- 3.2: Category Selection Grid -->
+        <section class="category-section">
+            <div class="category-container">
+                <h2 class="category-title">Choose a meal category</h2>
+                <p class="category-subtitle">Explore delicious authentic recipes with cook times for every time of day!</p>
+                
+                <div class="category-grid">
+                    <div class="category-card" onclick="openMenuPage('breakfast')">
+                        <div class="img-wrapper">
+                            <img src="image/breakfast.jpg" alt="Breakfast">
+                        </div>
+                        <h4>Breakfast</h4>
+                    </div>
+
+                    <div class="category-card" onclick="openMenuPage('lunch')">
+                        <div class="img-wrapper">
+                            <img src="image/lunch.jpg" alt="Lunch">
+                        </div>
+                        <h4>Lunch</h4>
+                    </div>
+
+                    <div class="category-card" onclick="openMenuPage('dinner')">
+                        <div class="img-wrapper">
+                            <img src="image/dinner.jpg" alt="Dinner">
+                        </div>
+                        <h4>Dinner</h4>
+                    </div>
+
+                    <div class="category-card" onclick="openMenuPage('desserts')">
+                        <div class="img-wrapper">
+                            <img src="image/dessert.jpg" alt="Desserts">
+                        </div>
+                        <h4>Desserts</h4>
+                    </div>
+
+                    <div class="category-card" onclick="openMenuPage('drinks')">
+                        <div class="img-wrapper">
+                            <img src="image/drinks.jpg" alt="Drinks">
+                        </div>
+                        <h4>Drinks</h4>
+                    </div>
+
+                    <div class="category-card" onclick="openMenuPage('snacks')">
+                        <div class="img-wrapper">
+                            <img src="image/snacks.jpg" alt="Snacks">
+                        </div>
+                        <h4>Snacks</h4>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3.3: Metrics & Counter Section -->
+        <section class="dp-metrics-section py-5">
+            <div class="container">
+                <div class="row text-center g-3">
+                    <div class="col-md-3 col-6">
+                        <div class="dp-metric-box p-3">
+                            <i class='bx bx-book-open fs-1 text-danger'></i>
+                            <h3 class="fw-bold mt-2 mb-0">500+</h3>
+                            <p class="text-muted small mb-0">Tested Sri Lankan Recipes</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="dp-metric-box p-3">
+                            <i class='bx bx-group fs-1 text-primary'></i>
+                            <h3 class="fw-bold mt-2 mb-0">12,500+</h3>
+                            <p class="text-muted small mb-0">Active Home Cooks</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="dp-metric-box p-3">
+                            <i class='bx bx-dish fs-1 text-success'></i>
+                            <h3 class="fw-bold mt-2 mb-0">100%</h3>
+                            <p class="text-muted small mb-0">Free Step-by-Step Guides</p>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="dp-metric-box p-3">
+                            <i class='bx bx-star fs-1 text-warning'></i>
+                            <h3 class="fw-bold mt-2 mb-0">4.9 / 5</h3>
+                            <p class="text-muted small mb-0">Community Satisfaction</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3.4: About Us Section -->
+        <section id="about-us-section" class="py-5 home-scroll-section">
+            <div class="container">
+                <div class="text-center mb-4">
+                    <span class="badge bg-danger px-3 py-2 fw-semibold">WHO WE ARE</span>
+                    <h2 class="category-title mt-2">About Yummy.lk</h2>
+                    <p class="category-subtitle">Empowering Sri Lankan Home Cooks through Interactive Digital Recipes</p>
+                </div>
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="about-card p-4 rounded shadow-sm bg-white border">
+                            <h4 class="fw-bold mb-3" style="color: var(--main-color);"><i class='bx bx-target-lock me-2'></i>Our Vision & Mission</h4>
+                            <p class="text-muted">Yummy.lk is dedicated to preserving traditional Sri Lankan culinary culture while adapting it for busy learners, students, and home cooks worldwide. Our platform offers exact prep times, step-by-step directions, and authentic ingredient lists for every dish.</p>
+                            <div class="p-3 bg-light rounded mt-3 border">
+                                <div class="d-flex align-items-center">
+                                    <i class='bx bxs-institution text-danger me-3 fs-1'></i>
+                                    <div>
+                                        <p class="mb-0 fw-bold small text-dark">ICT 1209: Web Technologies Mini Project Phase 1</p>
+                                        <p class="mb-0 text-muted" style="font-size: 13px;">Department of ICT, Faculty of Technology, Rajarata University of Sri Lanka.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="row g-3">
+                            <div class="col-sm-6">
+                                <div class="dp-info-tile p-4 text-center h-100 bg-white border rounded shadow-sm">
+                                    <i class='bx bx-time-five fs-1 text-danger mb-2'></i>
+                                    <h6 class="fw-bold">Accurate Cook Times</h6>
+                                    <p class="text-muted small mb-0">Every recipe includes prep and cook times so you can plan meals effectively.</p>
+                                </div>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="dp-info-tile p-4 text-center h-100 bg-white border rounded shadow-sm">
+                                    <i class='bx bx-list-check fs-1 text-success mb-2'></i>
+                                    <h6 class="fw-bold">Clear Step-by-Step</h6>
+                                    <p class="text-muted small mb-0">Detailed numbered instructions simplify even complex traditional gravies.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3.5: Contact Us Section -->
+        <section id="contact-us-section" class="py-5 bg-white border-top home-scroll-section">
+            <div class="container">
+                <div class="text-center mb-4">
+                    <span class="badge bg-danger px-3 py-2 fw-semibold">GET IN TOUCH</span>
+                    <h2 class="category-title mt-2">Contact Us</h2>
+                    <p class="category-subtitle">Have recipe inquiries, culinary suggestions, or technical feedback? We'd love to hear from you!</p>
+                </div>
+
+                <div class="row g-4">
+                    <div class="col-lg-5">
+                        <div class="dp-contact-info-panel h-100 p-4 rounded shadow-sm border bg-light">
+                            <h5 class="fw-bold mb-3" style="color: var(--main-color);"><i class='bx bx-map-pin me-2'></i>Campus Hub</h5>
+                            <p class="text-muted mb-2">Faculty of Technology, Rajarata University of Sri Lanka, Mihintale.</p>
+                            <hr>
+                            <p class="text-muted mb-2"><i class='bx bx-phone me-2 text-danger'></i><strong>Helpline:</strong> 074 292 1957 </p>
+                            <p class="text-muted mb-0"><i class='bx bx-envelope me-2 text-danger'></i><strong>Email:</strong> hello@yummy.lk</p>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-7">
+                        <form id="dpHomeContactForm" class="p-4 border rounded shadow-sm bg-light">
+                            <div class="row g-3">
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Your Name</label>
+                                    <input type="text" id="homeContactName" class="form-control" >
+                                </div>
+                                <div class="col-md-6">
+                                    <label class="form-label small fw-semibold">Your Email</label>
+                                    <input type="email" id="homeContactEmail" class="form-control" >
+                                </div>
+                                <div class="col-12">
+                                    <label class="form-label small fw-semibold">Your Message</label>
+                                    <textarea id="homeContactMessage" class="form-control" rows="4" ></textarea>
+                                </div>
+                                <div class="col-12">
+                                    <button type="submit" class="btn dp-btn-primary w-100 py-2 fw-semibold">Send Message</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================
+         SECTION 4: MENU LISTING PAGE VIEW
+         ========================================== -->
+    <main id="menu-page" class="page-section" style="display: none;">
+        <section class="menu-section">
+            <div class="menu-container">
+                <h1 id="category-title" class="menu-title">Category Menu</h1>
+                <p class="menu-subtitle">Explore specific delicious foods for every time of the day!</p>
+
+                <!-- Search/Filter Input -->
+                <div class="menu-toolbar">
+                    <input type="text" id="menuFilterInput" placeholder="Filter these results by name or ingredient..." oninput="filterMenuRecipes(this.value)">
+                </div>
+
+                <!-- Drink Category Sub-tabs -->
+                <div id="drinksSubNav" class="sub-tab-buttons" style="display: none;">
+                    <button class="sub-btn active" onclick="filterDrinkSub('smoothies', this)">Smoothies</button>
+                    <button class="sub-btn" onclick="filterDrinkSub('mojito', this)">Mojito</button>
+                    <button class="sub-btn" onclick="filterDrinkSub('freshjuice', this)">Fresh Juice</button>
+                </div>
+
+                <!-- Recipe Cards Grid -->
+                <div id="menu-recipe-grid" class="recipe-grid"></div>
+
+                <div class="back-home-wrapper">
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="goBack()">‹ Back</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================
+         SECTION 5: FAVORITES PAGE VIEW
+         ========================================== -->
+    <main id="favorites-page" class="page-section" style="display: none;">
+        <section class="menu-section">
+            <div class="menu-container">
+                <h1 class="menu-title">My Favorites</h1>
+                <p class="menu-subtitle">Recipes you've saved for later &mdash; click the heart on any recipe to save it here.</p>
+
+                <div id="favorites-recipe-grid" class="recipe-grid"></div>
+
+                <div class="back-home-wrapper">
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="goBack()">‹ Back</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================
+         SECTION 6: RECIPE DETAILS PAGE VIEW
+         ========================================== -->
+    <main id="details-page" class="page-section" style="display: none;">
+        <section class="details-section">
+            <div class="details-container">
+                <p class="details-eyebrow" id="detailsCategoryHeading">Category</p>
+                <h1 id="cardRecipeTitle" class="details-title">Recipe Title</h1>
+                <p class="details-subtitle" id="cardRecipeDesc">Recipe description.</p>
+
+                <div class="details-hero-img">
+                    <img id="detailsRecipeImage" src="" alt="Recipe photo">
+                </div>
+
+                <!-- Cook Time Indicators -->
+                <div class="recipe-meta-cards">
+                    <div class="meta-item">
+                        <i class='bx bx-time-five'></i>
+                        <div>
+                            <span class="meta-label">Prep Time</span>
+                            <strong id="cardPrepTime">15 mins</strong>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <i class='bx bx-stopwatch'></i>
+                        <div>
+                            <span class="meta-label">Cook Time</span>
+                            <strong id="cardCookTime">25 mins</strong>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <i class='bx bx-user'></i>
+                        <div>
+                            <span class="meta-label">Servings</span>
+                            <strong id="cardServings">4 Persons</strong>
+                        </div>
+                    </div>
+                    <div class="meta-item">
+                        <i class='bx bx-dish'></i>
+                        <div>
+                            <span class="meta-label">Difficulty</span>
+                            <strong id="cardDifficulty">Easy</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="details-meta-row">
+                    <button id="detailsFavBtn" class="fav-btn" onclick="toggleFavoriteCurrent()">
+                        <i class='bx bx-heart'></i> Save Recipe
+                    </button>
+                    <div class="rating-summary" id="detailsAvgRating"></div>
+                </div>
+
+                <!-- Ingredients & Steps Side-by-Side -->
+                <div class="details-body-grid">
+                    <div class="ingredients-panel">
+                        <h4>Ingredients</h4>
+                        <ul id="cardRecipeIngredients"></ul>
+                    </div>
+
+                    <div class="instructions-panel">
+                        <h4>Step-by-Step Cooking Method</h4>
+                        <div id="cardRecipeSteps" class="steps-timeline"></div>
+                    </div>
+                </div>
+
+                <!-- Community Reviews -->
+                <div class="comments-panel mt-4">
+                    <h4>Community Feedback (<span id="commentCount">0</span>)</h4>
+                    <div id="commentsList" class="comments-list"></div>
+
+                    <form id="addCommentForm" class="comment-form mt-3">
+                        <div class="mb-2">
+                            <label class="form-label small fw-semibold">Your Name</label>
+                            <input type="text" id="commentName" class="form-control form-control-sm" required>
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label small fw-semibold d-block">Your Rating</label>
+                            <div id="starPicker" class="star-picker"></div>
+                            <input type="hidden" id="commentRatingValue" value="5">
+                        </div>
+                        <div class="mb-2">
+                            <label class="form-label small fw-semibold">Your Feedback</label>
+                            <textarea id="commentText" class="form-control form-control-sm" rows="3" placeholder="Share tips, tweaks, or how it turned out..." required></textarea>
+                        </div>
+                        <button type="submit" class="btn dp-btn-primary w-100 py-2 fw-semibold">Post Feedback</button>
+                    </form>
+                </div>
+
+                <div class="back-home-wrapper">
+                    <a href="javascript:void(0)" class="back-home-btn" onclick="goBack()">‹ Back</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- ==========================================
+         SECTION 7: SITE FOOTER
+         ========================================== -->
+    <footer class="site-footer">
+        <div class="footer-container">
+            <div class="footer-row">
+                <div class="footer-col brand-col">
+                    <h2 class="footer-logo">Yummy.lk</h2>
+                    <p class="info-label"><strong>Campus Location:</strong></p>
+                    <p class="info-text">Faculty of Technology, Rajarata University of Sri Lanka, Mihintale.</p>
+                    <p class="info-label"><strong>Helpline & Inquiries:</strong></p>
+                    <p class="info-text">074 292 1954 | hello@yummy.lk</p>
+                </div>
+
+                <div class="footer-col links-col">
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="switchPage('home')">Home Page</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSection('about-us-section')">About Us</a></li>
+                        <li><a href="javascript:void(0)" onclick="scrollToSection('contact-us-section')">Contact Us</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-col links-col">
+                    <ul class="footer-links">
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('breakfast')">Breakfast Menu</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('lunch')">Lunch Menu</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('dinner')">Dinner Menu</a></li>
+                        <li><a href="javascript:void(0)" onclick="openMenuPage('desserts')">Desserts</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Yummy.lk. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==========================================
+         SECTION 8: MODALS (POP-UPS)
+         ========================================== -->
+
+    <!-- 8.1: Auth Modal (Sign In / Register) -->
+    <div class="modal fade" id="dpAuthModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content dp-auth-card">
+                <div class="modal-header border-0 pb-0">
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4 pt-1 text-center">
+                    <div class="dp-auth-brand mb-3">
+                        <div class="dp-logo-circle mb-2 mx-auto"><i class='bx bxs-graduation'></i></div>
+                        <h4 class="fw-bold mt-2 mb-0" style="color: var(--main-color);">Yummy.lk Member Access</h4>
+                        <p class="text-muted small">Sign in or register to join</p>
+                    </div>
+
+                    <ul class="nav nav-pills nav-justified dp-pills mb-3">
+                        <li class="nav-item">
+                            <button class="nav-link active" data-bs-toggle="pill" data-bs-target="#tab-dp-signin">Sign In</button>
+                        </li>
+                        <li class="nav-item">
+                            <button class="nav-link" data-bs-toggle="pill" data-bs-target="#tab-dp-reg">Register</button>
+                        </li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div class="tab-pane fade show active" id="tab-dp-signin">
+                            <form id="dpSignInForm">
+                                <div class="mb-3 text-start">
+                                    <label class="form-label small fw-semibold">Email or Mobile Number</label>
+                                    <input type="text" id="loginIdentifier" class="form-control"  required>
+                                </div>
+                                <div class="mb-3 text-start">
+                                    <label class="form-label small fw-semibold">Password</label>
+                                    <input type="password" id="loginPassword" class="form-control"  required>
+                                </div>
+                                <button type="submit" class="btn dp-btn-primary w-100 py-2 fw-semibold">Sign In</button>
+                            </form>
+                        </div>
+                        <div class="tab-pane fade" id="tab-dp-reg">
+                            <form id="dpRegisterForm">
+                                <div class="mb-2 text-start">
+                                    <label class="form-label small fw-semibold">Full Name</label>
+                                    <input type="text" id="regFullName" class="form-control"  required>
+                                </div>
+                                <div class="mb-2 text-start">
+                                    <label class="form-label small fw-semibold">Email</label>
+                                    <input type="email" id="regEmail" class="form-control"  required>
+                                </div>
+                                <div class="mb-2 text-start">
+                                    <label class="form-label small fw-semibold">Mobile Phone</label>
+                                    <input type="tel" id="regPhone" class="form-control"  required>
+                                </div>
+                                <div class="mb-3 text-start">
+                                    <label class="form-label small fw-semibold">Password</label>
+                                    <input type="password" id="regPassword" class="form-control"  required>
+                                </div>
+                                <button type="submit" class="btn dp-btn-primary w-100 py-2 fw-semibold">Create Account</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 8.2: Add Recipe Modal -->
+    <div class="modal fade" id="addRecipeModal" tabindex="-1">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content">
+                <div class="modal-header border-0 pb-0">
+                    <h5 class="modal-title fw-bold">Add New Recipe</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body p-4">
+                    <form id="addRecipeForm" novalidate>
+                        <div class="row g-2">
+                            <div class="col-md-8 text-start mb-2">
+                                <label class="form-label fw-semibold">Recipe Title</label>
+                                <input type="text" class="form-control" id="recipeTitleInput" placeholder="e.g. Pol Rotti" required>
+                            </div>
+                            <div class="col-md-4 text-start mb-2">
+                                <label class="form-label fw-semibold">Category</label>
+                                <select class="form-select" id="recipeCategoryInput" onchange="toggleSubCategoryField()" required>
+                                    <option value="" selected disabled>Choose category...</option>
+                                    <option value="breakfast">Breakfast</option>
+                                    <option value="lunch">Lunch</option>
+                                    <option value="dinner">Dinner</option>
+                                    <option value="desserts">Desserts</option>
+                                    <option value="drinks">Drinks</option>
+                                    <option value="snacks">Snacks</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="row g-2 mb-2">
+                            <div class="col-md-3 text-start">
+                                <label class="form-label small fw-semibold">Prep Time</label>
+                                <input type="text" class="form-control" id="recipePrepTimeInput" placeholder="e.g. 15 mins" required>
+                            </div>
+                            <div class="col-md-3 text-start">
+                                <label class="form-label small fw-semibold">Cook Time</label>
+                                <input type="text" class="form-control" id="recipeCookTimeInput" placeholder="e.g. 20 mins" required>
+                            </div>
+                            <div class="col-md-3 text-start">
+                                <label class="form-label small fw-semibold">Servings</label>
+                                <input type="text" class="form-control" id="recipeServingsInput" placeholder="e.g. 4 Persons" required>
+                            </div>
+                            <div class="col-md-3 text-start">
+                                <label class="form-label small fw-semibold">Difficulty</label>
+                                <select class="form-select" id="recipeDifficultyInput">
+                                    <option value="Easy">Easy</option>
+                                    <option value="Medium">Medium</option>
+                                    <option value="Hard">Hard</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="col text-start mb-2" id="subCategoryWrapper" style="display: none;">
+                            <label class="form-label fw-semibold">Drink Type</label>
+                            <select class="form-select" id="recipeSubCategoryInput">
+                                <option value="smoothies">Smoothies</option>
+                                <option value="mojito">Mojito</option>
+                                <option value="freshjuice">Fresh Juice</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-2 text-start">
+                            <label class="form-label fw-semibold">Short Description</label>
+                            <textarea class="form-control" id="recipeDescInput" rows="2" placeholder="Brief summary of this dish..." required></textarea>
+                        </div>
+
+                        <div class="mb-2 text-start">
+                            <label class="form-label fw-semibold">Ingredients (one per line)</label>
+                            <textarea class="form-control" id="recipeIngredientsInput" rows="3" placeholder="2 cups Wheat Flour&#10;1 cup Grated Coconut&#10;Salt to taste" required></textarea>
+                        </div>
+
+                        <div class="mb-2 text-start">
+                            <label class="form-label fw-semibold">Cooking Instructions (one step per line)</label>
+                            <textarea class="form-control" id="recipeInstructionsInput" rows="4" placeholder="Mix flour and coconut in a bowl.&#10;Add warm water slowly to knead into dough.&#10;Shape into flat rounds and roast on a hot griddle." required></textarea>
+                        </div>
+
+                        <div class="mb-3 text-start">
+                            <label class="form-label fw-semibold">Recipe Photo <span class="text-muted fw-normal">(optional)</span></label>
+                            <input type="file" class="form-control" id="recipeImageInput" accept="image/*">
+                        </div>
+                        <button type="submit" class="btn text-white w-100 fw-bold py-2 mt-2" style="background-color: var(--main-color);">Publish Recipe</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
